@@ -1,182 +1,409 @@
-# AI-Project-Mentor
 
-### AI-Guided Academic Project Progress Tracking Platform with Planning & Mentorship Assistance
+# AI Project Mentor
 
-AI-Project-Mentor is an academic capstone project management platform that combines intelligent student self-service onboarding, dynamic milestone scheduling, risk assessment, and conversational AI mentorship with an executive, evidence-based **Faculty Oversight and Cohort Analytics Dashboard**.
+### AI-Guided Academic Project Progress Tracking Platform with Planning and Mentorship Assistance
 
----
+**Project Domain:** Artificial Intelligence · Web Development · AI Agents · Academic Project Management
 
-## 🌟 Key Features
-
-### For Students
-- **Intelligent Intake & Blueprinting**: Feasibility analysis, scope definition, and tailored technology stack recommendations.
-- **Dynamic Milestone Scheduling**: $N$-week milestone planning with automatic task reallocation upon reported delays.
-- **AI Mentorship Coach**: 24/7 conversational advice on software architecture, debugging, and academic project methodologies.
-- **Progress Tracking**: Weekly task check-ins with problem and blocker reporting.
-- **Academic Documentation Generation**: Automated creation of Project Synopsis, Technical Methodology, and periodic Progress Reports.
-
-### For Faculty Advisors
-- **Real-Time Cohort KPI Dashboard**: Instant visibility into total, in-progress, completed, needing-attention, and at-risk projects, along with overdue milestones.
-- **Explainable Health Scoring Engine**: Multi-factor mathematical scoring ($0$–$100$) evaluating task completion, schedule alignment, overdue milestones, risk severity, and update staleness.
-- **Precedence-Based Blocker Detection**: Explicit rules ensuring critical unresolved blockers immediately flag projects as *At Risk*, regardless of high completion percentages.
-- **9-Point AI Executive Summaries**: Concise, structured briefings highlighting achievements, blockers, deadlines, and recommended faculty interventions, with 100% deterministic fallback guarantees.
-- **Cohort Search, Filter & Sort**: Search by student or project title, filter by health status or lifecycle phase, and sort by health or progress metrics.
+**Repository:** [AI_ProjectMentor](https://github.com/ShreyalK445/AI_ProjectMentor)
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## 📌 Project Overview
 
-- **Frontend**: React 19, Vite 6, JavaScript (ES6+), Vanilla CSS (responsive glassmorphism design system).
-- **Backend**: Python 3.11+, Flask 3, Flask-CORS.
-- **Database**: MongoDB (via PyMongo) with an automatic In-Memory cohort fallback engine for zero-dependency development.
-- **AI Services**: Google GenAI SDK (`google-genai`), OpenAI API (`openai`), CrewAI, and deterministic rule engines.
+**AI Project Mentor** is an AI-assisted academic project management platform designed to help students plan, organize, execute, and document their academic projects with structured guidance.
 
-For comprehensive technical specifications, refer to [docs/TECHNICAL_ARCHITECTURE.md](file:///c:/Projects/AI-Project-Mentor/docs/TECHNICAL_ARCHITECTURE.md).
+Students often struggle to convert an initial idea into a well-defined project with realistic milestones, suitable technologies, manageable tasks, and effective progress tracking. Faculty members may also find it challenging to monitor multiple student projects and provide continuous individualized guidance.
 
----
+AI Project Mentor aims to address these challenges through a centralized platform that combines project planning, technology recommendations, risk assessment, progress monitoring, conversational mentorship, documentation assistance, and faculty-oriented monitoring.
 
-## 🚀 Quick Start Guide
+The platform is designed to support students throughout the academic project lifecycle, from initial idea submission to implementation, progress review, and final documentation.
 
-### 1. Prerequisites
-- **Python 3.11+** installed.
-- **Node.js (v18+)** and `npm` installed.
-- *(Optional)* **MongoDB** running locally on port 27017. If MongoDB is absent, the backend automatically operates using its built-in in-memory fallback.
+## 🎯 Problem Statement
 
----
+Students frequently encounter difficulties in defining project objectives, selecting appropriate technologies, estimating realistic timelines, identifying risks, and maintaining consistent progress. Limited access to personalized mentorship can make these challenges more difficult.
 
-### 2. Environment Configuration
+At the same time, faculty members supervising multiple teams may need a more organized way to review project status and identify areas requiring attention.
 
-In `backend/.env`, configure your environment variables:
-```ini
-# Server Configuration
-PORT=5000
-FLASK_ENV=development
+The project aims to provide an integrated, AI-assisted platform that supports structured project planning, continuous guidance, progress tracking, and faculty monitoring.
 
-# Database Configuration (Optional - in-memory fallback engages if unreachable)
-MONGO_URI=mongodb://localhost:27017/ai_project_mentor
+## 💡 Objectives
 
-# AI Provider API Keys (Optional - deterministic rule engines engage if absent)
-GEMINI_API_KEY=your_gemini_api_key_here
-OPENAI_API_KEY=your_openai_api_key_here
+- Simplify academic project submission and organization.
+- Support project feasibility analysis and scope definition.
+- Recommend suitable technologies based on project requirements.
+- Assist in creating project milestones and execution plans.
+- Identify potential project risks and suggest mitigation strategies.
+- Provide conversational AI-based project guidance.
+- Track project progress through task completion information.
+- Support academic documentation generation.
+- Provide a faculty-oriented interface for project monitoring.
+- Integrate the frontend, backend, database, and AI-related components into a unified application.
+
+## ✨ Key Features and Modules
+
+The following modules are part of the project's documented scope. Their actual implementation status should be verified against the current repository.
+
+### 1. Student Dashboard
+
+Provides a central interface for students to access project-related features, review available information, and navigate between modules.
+
+### 2. Student Profile and Skill Assessment
+
+Supports student profile information and technical skill details that may help contextualize project planning and recommendations.
+
+### 3. Project Submission
+
+Allows students to enter project information, such as:
+
+- Project title
+- Project category
+- Project description
+- Project objectives
+
+The submitted information can serve as the starting point for project planning and mentoring workflows.
+
+### 4. Project Roadmap and Planning
+
+Designed to organize a project into milestones and tasks, with planning details such as priorities, dependencies, and timelines where supported.
+
+### 5. Technology Recommendation Agent
+
+Provides technology suggestions relevant to the project requirements. Example technologies shown in the project interface include Python, ReactJS, Flask, and MongoDB.
+
+### 6. Risk Assessment and Mitigation Agent
+
+Designed to identify possible project risks and provide mitigation guidance. Risk assessment may consider factors such as probability, impact, dependencies, and resource constraints, depending on the implemented logic.
+
+### 7. Progress Tracking and Plan Adjustment
+
+Supports monitoring project progress through task completion information.
+
+The project brief specifies the following progress calculation:
+
+**Progress (%) = (Completed Tasks / Total Tasks) × 100**
+
+For example, if 4 out of 10 tasks are completed, the calculated progress is 40%.
+
+The application should handle projects with zero tasks safely.
+
+### 8. Conversational AI Mentor
+
+Provides an interface intended for students to ask project-related questions and receive guidance during planning and development.
+
+### 9. Documentation Generation Hub
+
+Designed to assist with academic project documentation, potentially including project synopses, methodology descriptions, and progress reports. Supported document types and export formats should be confirmed from the implementation.
+
+### 10. Faculty Dashboard
+
+Designed to help faculty members review available project information and monitor student project progress.
+
+The exact dashboard metrics, data sources, and access permissions depend on the implemented functionality.
+
+## 🏗️ System Architecture
+
+The project materials identify a frontend, backend, database, and AI-agent architecture.
+
+```text
+              Student / Faculty
+                     |
+                     v
+          ReactJS + Vite Frontend
+                     |
+                     v
+             Python + Flask API
+                /          \
+               v            v
+          MongoDB       AI Agent Workflow
+                         (CrewAI)
+               \            /
+                v          v
+             Application Response
+                     |
+                     v
+             Frontend Interface
 ```
 
----
+**Note:** This is a conceptual architecture based on the project brief. Confirm the actual request flow, agent integration, and database interactions from the source code before treating the diagram as an exact implementation diagram.
 
-### 3. Backend Installation & Startup
+## 🛠️ Technology Stack
 
-```bash
-# Navigate to backend directory
-cd backend
+| Technology | Purpose |
+| ---------- | ------- |
+| ReactJS | Frontend user interface |
+| Vite | Frontend development and build tooling |
+| Python | Backend programming language |
+| Flask | Backend API framework |
+| MongoDB | Document-oriented database |
+| CrewAI | AI-agent workflow framework identified in the project materials |
 
-# Create and activate virtual environment (if not already created)
-python -m venv venv
+Actual package versions, AI model/provider, and additional dependencies should be taken from the repository's configuration files.
 
-# Windows PowerShell:
-.\venv\Scripts\Activate.ps1
-# Windows Command Prompt:
-.\venv\Scripts\activate.bat
-# Linux / macOS:
-source venv/bin/activate
+## 🔄 General Workflow
 
-# Install dependencies
-pip install -r requirements.txt
+1. The student opens the application.
+2. The student provides relevant profile and skill information, where required.
+3. The student submits a project idea with its description and objectives.
+4. The application processes the submitted project information.
+5. The student accesses the available planning and technology recommendation features.
+6. Potential project risks and mitigation suggestions can be reviewed.
+7. The student manages tasks and updates project progress.
+8. The student uses available AI mentoring and documentation features.
+9. Faculty members access the monitoring interface where supported.
 
-# Start Flask API server
-python app.py
+The exact workflow depends on which features are connected and operational in the current version.
+
+## 📁 Project Structure
+
+The following is a **conceptual structure**, not a verified listing of the repository's files. Replace it with the actual structure after reviewing the codebase.
+
+```text
+AI_ProjectMentor/
+├── frontend/                 # ReactJS and Vite application
+├── backend/                  # Python and Flask application
+│   ├── routes/               # API route modules, if organized this way
+│   ├── services/             # Application services, if present
+│   └── agents/               # AI-agent logic, if organized separately
+├── README.md
+├── .gitignore
+└── requirements.txt          # If used by the backend
 ```
-The backend API server will start on `http://127.0.0.1:5000`.
 
----
+The actual repository may use different folder names or a different organization. Refer to the existing source files rather than creating these folders solely to match this example.
 
-### 4. Frontend Installation & Startup
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+Install or configure the following, as applicable to the repository:
+
+- Git
+- Node.js and npm
+- Python
+- MongoDB or the configured MongoDB service
+- Required AI model/provider credentials, if the application uses an external AI service
+
+### Step 1: Clone the Repository
 
 ```bash
-# Open a new terminal and navigate to frontend directory
-cd frontend
+git clone https://github.com/ShreyalK445/AI_ProjectMentor.git
+cd AI_ProjectMentor
+```
 
-# Install npm dependencies
+### Step 2: Set Up the Frontend
+
+Navigate to the actual frontend directory identified in the repository.
+
+```bash
+cd <frontend-directory>
 npm install
+```
 
-# Start Vite development server
+Start the development server using the script defined in `package.json`. A common Vite command is:
+
+```bash
 npm run dev
 ```
-The frontend application will be accessible at `http://localhost:5173`.
 
----
+Confirm the available scripts and frontend directory before running these commands.
 
-## 🧪 Testing & Verification
+### Step 3: Set Up the Backend
 
-The repository contains an automated test suite verifying health scoring, mentor summaries, API integration, and all 8 end-to-end scenarios.
+Open a separate terminal and navigate to the actual backend directory.
 
-### Run Automated Unit & E2E Tests
+Create and activate a Python virtual environment:
+
 ```bash
-cd backend
-python -m unittest discover -s tests -p "test_*.py"
+python -m venv .venv
 ```
-*Expected Result:*
+
+On Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+On macOS or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies using the dependency file provided by the repository. If the backend contains `requirements.txt`, use:
+
+```bash
+pip install -r requirements.txt
+```
+
+If a different dependency manager is used, follow the configuration included in the project.
+
+### Step 4: Configure Environment Variables
+
+Create a local environment file only if the application expects one. Check the source code and existing example configuration for the required variable names.
+
+Typical configuration categories may include:
+
 ```text
-Ran 30 tests in ~10s
-OK
+MONGODB_URI=<your-mongodb-connection-string>
+DATABASE_NAME=<your-database-name>
+AI_PROVIDER_API_KEY=<your-provider-key-if-required>
 ```
 
-### Run Prompt & Pipeline Reliability Evaluation
-```bash
-cd backend
-python tests/evaluate_prompts.py
-```
-Evaluates all 6 academic benchmark scenarios (Feasible Web, AI/ML, Overambitious, Limited Skills, Strict Deadlines, High Technical Risk) against agent pipelines and fallback engines.
+These names are illustrative placeholders, **not confirmed variable names from the project**. Use the exact names expected by the application.
 
-### Run Frontend Production Build
-```bash
-cd frontend
-npm run build
-```
-Compiles and bundles the React production assets into `frontend/dist/`.
+Do not commit credentials, private keys, or real environment files containing secrets to GitHub.
 
-For complete empirical testing results, consult [docs/TESTING_REPORT.md](file:///c:/Projects/AI-Project-Mentor/docs/TESTING_REPORT.md).
+### Step 5: Start the Backend
+
+Run the backend using the command documented by the application. For example, a Flask application may be started through its configured Flask entry point.
+
+The exact command depends on the backend entry file, application configuration, and scripts in the repository.
+
+### Step 6: Run the Application
+
+Start the frontend and backend using their documented development commands. Confirm that:
+
+- The frontend loads successfully.
+- The backend API starts without errors.
+- MongoDB connectivity works if persistence is required.
+- AI-related features work when their required services and credentials are configured.
+
+If a feature is unavailable, document the limitation instead of assuming that the integration is operational.
+
+## 🔌 Backend API
+
+The project materials identify the following API route groups:
+
+| Route group | Intended purpose |
+| ----------- | ---------------- |
+| `/api/students` | Student-related operations |
+| `/api/projects` | Project-related operations |
+| `/api/skills` | Skill-related operations |
+
+The exact HTTP methods, request bodies, response formats, validation rules, and status codes must be documented from the actual Flask route definitions.
+
+## 🧠 AI-Agent Design
+
+The project is designed around specialized AI-assisted responsibilities.
+
+| Agent or functional area | Intended responsibility |
+| ------------------------ | ----------------------- |
+| Feasibility and scope | Evaluate project ideas and help define scope |
+| Technology recommendation | Suggest relevant technologies |
+| Milestone planning | Organize project execution into milestones and tasks |
+| Risk assessment | Identify possible risks and suggest mitigation |
+| Progress and plan adjustment | Support progress review and planning changes |
+| Conversational mentor | Provide project-related conversational guidance |
+| Documentation generation | Assist with academic project documents |
+
+CrewAI is identified in the project materials as the framework associated with the agent architecture.
+
+The actual agent definitions, task dependencies, model configuration, prompts, tools, and execution flow should be verified from the source code. AI-generated outputs should be reviewed by students and faculty rather than treated as guaranteed-correct answers.
+
+## 🗓️ Development Milestones
+
+The project statement describes four major development milestones.
+
+| Milestone | Focus |
+| --------- | ----- |
+| Milestone 1 | Foundation, architecture, data models, onboarding, skills, and project submission |
+| Milestone 2 | Feasibility and scope, technology recommendations, and project planning |
+| Milestone 3 | Risk assessment, conversational mentoring, progress tracking, and documentation |
+| Milestone 4 | Faculty dashboard, end-to-end testing, reliability improvements, documentation, and final demonstration |
+
+These describe the planned development progression. Actual completion status should be reconciled with the latest code, test evidence, and team records before publication.
+
+## 🧪 Testing and Quality Assurance
+
+Testing should cover the following areas:
+
+- Frontend navigation and form validation
+- Backend API request and response behavior
+- Database connectivity and data persistence
+- AI-agent outputs and error handling
+- Technology recommendation relevance
+- Risk assessment and mitigation outputs
+- Progress percentage calculations
+- Zero-task and empty-state behavior
+- Faculty dashboard data consistency and permissions
+- Documentation generation, if implemented
+- End-to-end integration and regression testing
+
+**Testing status:** Add actual test results, test coverage, and known defects after executing and documenting the tests. No pass rates or performance measurements are claimed in this README.
+
+## 🔐 Security and Responsible AI
+
+Important considerations include:
+
+- Keep database credentials and API keys outside committed source code.
+- Validate user input on the backend.
+- Enforce access permissions on the server wherever user roles are implemented.
+- Avoid exposing private student information to unauthorized users.
+- Handle unavailable AI services and invalid outputs gracefully.
+- Treat AI-generated plans and recommendations as guidance requiring human review.
+- Send only the information necessary for an AI request to external services.
+
+These are security recommendations, not claims that all controls are currently implemented.
+
+## 🚧 Current Limitations
+
+Implementation-specific limitations should be updated after reviewing and testing the application. Areas requiring verification include:
+
+- Whether all listed AI-agent functions are connected to live workflows.
+- Whether recommendations are generated dynamically or use predefined content.
+- The extent of database persistence for projects, milestones, tasks, and chat history.
+- The availability and behavior of documentation export.
+- The data sources and access controls of the faculty dashboard.
+- Error handling, authentication, authorization, and automated test coverage.
+
+## 🚀 Future Enhancements
+
+Potential future improvements include:
+
+- More detailed project feasibility analysis.
+- Editable project roadmaps and milestone scheduling.
+- Improved recommendation explanations and alternatives.
+- Risk prioritization and mitigation-status tracking.
+- Better AI response evaluation and prompt testing.
+- Personalized mentorship using relevant project context.
+- Expanded documentation templates and export options.
+- Enhanced faculty reporting and project-health indicators.
+- Automated integration and regression testing.
+- Stronger access controls, privacy safeguards, and audit logging.
+- Usability and accessibility improvements.
+
+## 👥 Project Team
+
+The following roles are recorded in the supplied project materials. Confirm the preferred names and contributions before final publication.
+
+| Team member | Recorded responsibility |
+| ----------- | ----------------------- |
+| Piyush | AI Architecture and CrewAI Lead |
+| Jeevana / Jeevi | Planning, Risk and Progress Specification Lead |
+| Sailaja G. | ReactJS Frontend Lead |
+| Shreyal K. | Backend, MongoDB and Integration Lead |
+| Phani Sri M.D.L.A. | Faculty Requirements, QA and Documentation Lead |
+
+**Department:** Artificial Intelligence
+
+**Project:** AI Project Mentor — AI-Guided Academic Project Progress Tracking Platform with Planning and Mentorship Assistance
+
+## 📚 References
+
+- [AI Project Mentor — GitHub Repository](https://github.com/ShreyalK445/AI_ProjectMentor)
+- [React Documentation](https://react.dev/)
+- [Vite Documentation](https://vite.dev/guide/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [MongoDB Documentation](https://www.mongodb.com/docs/)
+- [CrewAI Documentation](https://docs.crewai.com/)
+
+Consult the official documentation corresponding to the versions actually used by the project.
+
+## 📄 License
+
+Add the project's chosen license here. Until a license is selected and committed to the repository, do not assume that the project is distributed under an open-source license.
 
 ---
 
-## 📡 REST API Reference
-
-### Faculty Endpoints
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/faculty/dashboard` | Returns aggregate cohort KPI metrics (total, active, completed, attention, at risk, overdue). |
-| `GET` | `/api/faculty/projects` | Returns searchable, filterable, and sortable project roster. |
-| `GET` | `/api/faculty/projects/<id>` | Returns full project inspection record (timeline, progress logs, risks, health). |
-| `POST` | `/api/faculty/summary` | Generates or regenerates a 9-point structured AI faculty briefing. |
-
-### Student Endpoints
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/onboarding/submit` | Submits student intake data and project proposal. |
-| `POST` | `/api/projects` | Registers/syncs project metadata across storage layers. |
-| `POST` | `/api/blueprint/generate` | Generates feasibility and scope analysis. |
-| `POST` | `/api/technology/recommend`| Recommends language, framework, and database stacks. |
-| `POST` | `/api/timeline/generate` | Generates milestone timeline schedule. |
-| `POST` | `/api/risks/analyze` | Generates project risk register and mitigations. |
-| `POST` | `/api/mentor/chat` | Multi-turn conversational mentorship query. |
-| `POST` | `/api/progress/track` | Submits weekly progress update and recalculates health. |
-| `POST` | `/api/timeline/adjust` | Dynamically reallocates delayed milestones. |
-| `POST` | `/api/docs/synopsis` | Generates academic project synopsis. |
-| `POST` | `/api/docs/methodology` | Generates technical methodology documentation. |
-| `POST` | `/api/docs/progress-report` | Generates IEEE-style progress report. |
-
----
-
-## 🛠️ Troubleshooting
-
-- **MongoDB Connection Error**: If MongoDB is not installed or running, no action is required. The system automatically initializes in-memory fallback storage with seeded sample projects (`proj-001` to `proj-005`).
-- **AI Provider 401 / Quota Error**: If API keys are missing or invalid, the platform activates its deterministic rule engine, returning structured milestone schedules and 9-point summaries without crashing.
-- **Port Conflicts**: If port `5000` is occupied, change the `PORT` variable in `backend/.env`. If port `5173` is occupied, Vite will automatically offer the next available port (e.g., `5174`).
-
----
-
-## 📚 Milestone 4 Documentation Index
-
-- [Gap Analysis & Audit](file:///c:/Projects/AI-Project-Mentor/docs/MILESTONE4_GAP_ANALYSIS.md): Initial audit findings, defect matrix, and remediation plan.
-- [Technical Architecture](file:///c:/Projects/AI-Project-Mentor/docs/TECHNICAL_ARCHITECTURE.md): Architectural topology, health formulas, persistence sync, and security controls.
-- [Comprehensive Testing Report](file:///c:/Projects/AI-Project-Mentor/docs/TESTING_REPORT.md): 30 unit/E2E test cases, prompt evaluations, build checks, and execution results.
-- [Final Project Report](file:///c:/Projects/AI-Project-Mentor/docs/FINAL_PROJECT_REPORT.md): Formal 17-section academic capstone report.
-- [Demonstration Guide](file:///c:/Projects/AI-Project-Mentor/docs/DEMO_GUIDE.md): 5–10 minute step-by-step walkthrough script for student and faculty workflows.
+**AI Project Mentor — Supporting students from project idea to structured execution through AI-assisted planning and mentorship.**
