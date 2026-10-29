@@ -322,7 +322,7 @@ export default function App() {
         setTimelineData(data.timeline);
         try {
           localStorage.setItem("apm_timeline", JSON.stringify(data.timeline));
-        } catch { }
+        } catch {}
 
         if (!progressData.week && data.timeline.weekly_plan?.length) {
           const firstWeek = data.timeline.weekly_plan[0];
@@ -444,7 +444,7 @@ export default function App() {
       console.error("Progress Tracking Error:", error);
       setProgressError(
         error.message ||
-        "Unable to connect to Progress Tracking. Please make sure the Flask backend is running on port 5000."
+          "Unable to connect to Progress Tracking. Please make sure the Flask backend is running on port 5000."
       );
     } finally {
       setProgressLoading(false);
@@ -809,8 +809,8 @@ export default function App() {
   const techStatus = technologyLoading
     ? "Running"
     : technologyResult
-      ? "Completed"
-      : "Not started";
+    ? "Completed"
+    : "Not started";
   const progressLocked = !technologyResult;
 
   const openTechnologyAgent = () => {
@@ -1442,1895 +1442,1894 @@ export default function App() {
         }
       `}</style>
 
-      <div
-        className={`app-shell theme-${settings.theme} font-${settings.fontSize}`}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="background-glow glow-one"></div>
-        <div className="background-glow glow-two"></div>
-        <div className="cyber-grid"></div>
+    <div
+      className={`app-shell theme-${settings.theme} font-${settings.fontSize}`}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="background-glow glow-one"></div>
+      <div className="background-glow glow-two"></div>
+      <div className="cyber-grid"></div>
 
+      <button
+        className="hamburger-button"
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
+
+      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         <button
-          className="hamburger-button"
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Open menu"
+          className="sidebar-close"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close menu"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          ✕
         </button>
 
-        {sidebarOpen && (
-          <div
-            className="sidebar-overlay"
-            onClick={() => setSidebarOpen(false)}
-          ></div>
+        <div className="brand">
+          <div className="brand-icon">
+            <span>AI</span>
+          </div>
+
+          <div>
+            <h2>AI Project Mentor</h2>
+            <p>Academic Guidance Platform</p>
+          </div>
+        </div>
+
+        <div className="sidebar-line"></div>
+        <div className="nav-heading">WORKSPACE</div>
+
+        <button
+          className={`nav-item ${currentPage === "dashboard" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentPage("dashboard");
+            setSidebarOpen(false);
+          }}
+        >
+          <span className="nav-icon">▦</span>
+          Dashboard
+        </button>
+
+        <div className="nav-heading onboarding-heading">PROJECT TOOLS</div>
+
+        <button
+          className={`nav-item ${currentPage === "profile" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentPage("profile");
+            setSidebarOpen(false);
+          }}
+        >
+          <span className="nav-icon">♙</span>
+          Student Profile
+        </button>
+
+        <button
+          className={`nav-item ${currentPage === "project" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentPage("project");
+            setSidebarOpen(false);
+          }}
+        >
+          <span className="nav-icon">▤</span>
+          Project Submission
+        </button>
+
+        <button
+          className={`nav-item ${currentPage === "review" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentPage("review");
+            setSidebarOpen(false);
+          }}
+        >
+          <span className="nav-icon">☑</span>
+          Project Roadmap
+        </button>
+
+        <button className={`nav-item ${currentPage === "agents" ? "active" : ""}`} onClick={() => { setCurrentPage("agents"); setSidebarOpen(false); }}><span className="nav-icon">✿</span>AI Agents</button>
+        <button className={`nav-item ${currentPage === "technology" ? "active" : ""}`} onClick={() => { setCurrentPage("technology"); setSidebarOpen(false); }}><span className="nav-icon">◇</span>Technology Agent</button>
+        <button className={`nav-item ${currentPage === "risk" ? "active" : ""}`} onClick={() => { setCurrentPage("risk"); setSidebarOpen(false); }}><span className="nav-icon">⚠</span>Risk Agent</button>
+        <button className={`nav-item ${currentPage === "progress" ? "active" : ""} ${progressLocked ? "locked" : ""}`} onClick={openProgressAgent}><span className="nav-icon">◔</span>Progress Tracker{progressLocked && <span className="lock-badge">🔒</span>}</button>
+        <button className={`nav-item ${currentPage === "faculty" ? "active" : ""}`} onClick={() => { setCurrentPage("faculty"); setSidebarOpen(false); }}><span className="nav-icon">▤</span>Faculty Dashboard</button>
+        <button className={`nav-item ${currentPage === "mentor" ? "active" : ""}`} onClick={() => { setCurrentPage("mentor"); setAiOpen(false); setSidebarOpen(false); }}><span className="nav-icon">✧</span>AI Mentor Chat</button>
+        <button className={`nav-item ${currentPage === "documentation" ? "active" : ""}`} onClick={() => { setCurrentPage("documentation"); setSidebarOpen(false); }}><span className="nav-icon">📄</span>Documentation Hub</button>
+        <button className={`nav-item ${currentPage === "settings" ? "active" : ""}`} onClick={() => { setCurrentPage("settings"); setSidebarOpen(false); }}><span className="nav-icon">⚙</span>Settings</button>
+
+        <div className="sidebar-bottom">
+          <div className="help-card">
+            <p className="help-title">NEED HELP?</p>
+
+            <div className="help-content">
+              <div className="mentor-bot">
+                <svg viewBox="0 0 100 100" className="mentor-bot-svg">
+                  <defs>
+                    <linearGradient
+                      id="botHead"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stopColor="#3ad4ff" />
+                      <stop offset="100%" stopColor="#8a3bff" />
+                    </linearGradient>
+                  </defs>
+
+                  <line
+                    x1="50"
+                    y1="8"
+                    x2="50"
+                    y2="18"
+                    stroke="url(#botHead)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="50" cy="6" r="4" fill="#3ad4ff" />
+                  <rect
+                    x="20"
+                    y="18"
+                    width="60"
+                    height="46"
+                    rx="16"
+                    fill="#0a1330"
+                    stroke="url(#botHead)"
+                    strokeWidth="3"
+                  />
+                  <rect
+                    x="30"
+                    y="30"
+                    width="16"
+                    height="18"
+                    rx="8"
+                    fill="#0a1330"
+                    stroke="#4ce0ff"
+                    strokeWidth="2.5"
+                  />
+                  <circle cx="38" cy="39" r="3.5" fill="#4ce0ff" />
+                  <rect
+                    x="54"
+                    y="30"
+                    width="16"
+                    height="18"
+                    rx="8"
+                    fill="#0a1330"
+                    stroke="#4ce0ff"
+                    strokeWidth="2.5"
+                  />
+                  <circle cx="62" cy="39" r="3.5" fill="#4ce0ff" />
+                  <path
+                    d="M38 54 Q50 60 62 54"
+                    stroke="#c86bff"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  <rect
+                    x="12"
+                    y="34"
+                    width="8"
+                    height="14"
+                    rx="4"
+                    fill="url(#botHead)"
+                  />
+                  <rect
+                    x="80"
+                    y="34"
+                    width="8"
+                    height="14"
+                    rx="4"
+                    fill="url(#botHead)"
+                  />
+                  <rect
+                    x="28"
+                    y="68"
+                    width="44"
+                    height="24"
+                    rx="10"
+                    fill="#0a1330"
+                    stroke="url(#botHead)"
+                    strokeWidth="3"
+                  />
+                  <circle cx="50" cy="80" r="4" fill="#4ce0ff" />
+                </svg>
+              </div>
+
+              <p>
+                Our AI Mentor is here to guide you through every step of your
+                project journey.
+              </p>
+            </div>
+
+            <button className="help-button" onClick={() => setAiOpen(true)}>
+              Get AI Assistance <span>→</span>
+            </button>
+          </div>
+
+          <div className="weather">
+            <span className="weather-icon">☁️</span>
+            <div>
+              <strong>28°C</strong>
+              <span>Mostly Clear</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main className="main-content">
+        <header className="top-header redesigned-header">
+          <div className="top-search"><span>⌕</span><input aria-label="Search" placeholder="Search projects, agents, or anything..." onKeyDown={(e) => { if (e.key === "Enter" && e.currentTarget.value.trim()) alert(`Search: ${e.currentTarget.value}`); }} /></div>
+          <div className="header-actions"><button className="notification" onClick={() => alert("You're all caught up!")} aria-label="Notifications">♧<i></i></button><button className="student-profile" onClick={() => setCurrentPage("profile")}><span className="avatar">{(formData.name || "SG").slice(0,2).toUpperCase()}</span><span><strong>{formData.name || auth?.name || "Student"}</strong><small>Student</small></span><span>⌄</span></button></div>
+        </header>
+        <div className="dashboard-welcome"><div><span>Welcome back, {formData.name || auth?.name || "there"}!</span><h1>{currentPage === "dashboard" ? "Student Dashboard" : currentPage === "progress" ? "Progress Tracking" : currentPage === "faculty" ? "Faculty Dashboard" : currentPage === "technology" ? "Technology Recommendation" : currentPage === "risk" ? "Risk Assessment & Mitigation" : currentPage === "documentation" ? "Documentation Generation Hub" : currentPage === "profile" ? "Student Profile" : currentPage === "project" ? "Project Submission" : currentPage === "review" ? "Project Roadmap" : currentPage === "settings" ? "Settings" : currentPage === "mentor" ? "Conversational AI Mentor" : "AI Agents"}</h1><p>{currentPage === "faculty" ? "Monitor student progress, project health, weekly task checklist and auto-generated mentor summaries." : currentPage === "agents" ? "Run your AI agents in order — Technology, Risk Assessment, and Progress Tracking." : currentPage === "risk" ? "Evaluate execution blockers, technical pitfalls, and mitigation strategies." : currentPage === "documentation" ? "Generate formal academic Synopsis, Methodology, and Progress Reports with one click." : currentPage === "settings" ? "Manage your profile, appearance, notifications and AI Mentor preferences." : currentPage === "mentor" ? "Your personal academic project guide — ask questions, debug blockers, and track weekly progress." : "Track your progress, manage your project, and get AI-powered guidance all in one place."}</p></div></div>
+
+        {(currentPage === "profile" || currentPage === "project") && (
+          <div className="onboarding-steps">
+            <div className={`onboarding-step ${currentPage === "profile" ? "active" : "done"}`}>
+              <div className="onboarding-step-icon">1</div>
+              <div className="onboarding-step-title">Profile</div>
+              <div className="onboarding-step-subtitle">Tell us about you</div>
+            </div>
+
+            <div className={`onboarding-step-line ${currentPage === "project" ? "filled" : ""}`}></div>
+
+            <div className={`onboarding-step ${currentPage === "project" ? "active" : ""}`}>
+              <div className="onboarding-step-icon">2</div>
+              <div className="onboarding-step-title">Project</div>
+              <div className="onboarding-step-subtitle">Share your idea</div>
+            </div>
+
+            <div className="onboarding-step-line"></div>
+
+            <div className="onboarding-step">
+              <div className="onboarding-step-icon">✓</div>
+              <div className="onboarding-step-title">Complete</div>
+              <div className="onboarding-step-subtitle">Review &amp; finish</div>
+            </div>
+          </div>
         )}
 
-        <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-          <button
-            className="sidebar-close"
-            onClick={() => setSidebarOpen(false)}
-            aria-label="Close menu"
-          >
-            ✕
-          </button>
-
-          <div className="brand">
-            <div className="brand-icon">
-              <span>AI</span>
-            </div>
-
-            <div>
-              <h2>AI Project Mentor</h2>
-              <p>Academic Guidance Platform</p>
-            </div>
-          </div>
-
-          <div className="sidebar-line"></div>
-          <div className="nav-heading">WORKSPACE</div>
-
-          <button
-            className={`nav-item ${currentPage === "dashboard" ? "active" : ""}`}
-            onClick={() => {
-              setCurrentPage("dashboard");
-              setSidebarOpen(false);
-            }}
-          >
-            <span className="nav-icon">▦</span>
-            Dashboard
-          </button>
-
-          <div className="nav-heading onboarding-heading">PROJECT TOOLS</div>
-
-          <button
-            className={`nav-item ${currentPage === "profile" ? "active" : ""}`}
-            onClick={() => {
-              setCurrentPage("profile");
-              setSidebarOpen(false);
-            }}
-          >
-            <span className="nav-icon">♙</span>
-            Student Profile
-          </button>
-
-          <button
-            className={`nav-item ${currentPage === "project" ? "active" : ""}`}
-            onClick={() => {
-              setCurrentPage("project");
-              setSidebarOpen(false);
-            }}
-          >
-            <span className="nav-icon">▤</span>
-            Project Submission
-          </button>
-
-          <button
-            className={`nav-item ${currentPage === "review" ? "active" : ""}`}
-            onClick={() => {
-              setCurrentPage("review");
-              setSidebarOpen(false);
-            }}
-          >
-            <span className="nav-icon">☑</span>
-            Project Roadmap
-          </button>
-
-          <button className={`nav-item ${currentPage === "agents" ? "active" : ""}`} onClick={() => { setCurrentPage("agents"); setSidebarOpen(false); }}><span className="nav-icon">✿</span>AI Agents</button>
-          <button className={`nav-item ${currentPage === "technology" ? "active" : ""}`} onClick={() => { setCurrentPage("technology"); setSidebarOpen(false); }}><span className="nav-icon">◇</span>Technology Agent</button>
-          <button className={`nav-item ${currentPage === "risk" ? "active" : ""}`} onClick={() => { setCurrentPage("risk"); setSidebarOpen(false); }}><span className="nav-icon">⚠</span>Risk Agent</button>
-          <button className={`nav-item ${currentPage === "progress" ? "active" : ""} ${progressLocked ? "locked" : ""}`} onClick={openProgressAgent}><span className="nav-icon">◔</span>Progress Tracker{progressLocked && <span className="lock-badge">🔒</span>}</button>
-          <button className={`nav-item ${currentPage === "faculty" ? "active" : ""}`} onClick={() => { setCurrentPage("faculty"); setSidebarOpen(false); }}><span className="nav-icon">▤</span>Faculty Dashboard</button>
-          <button className={`nav-item ${currentPage === "mentor" ? "active" : ""}`} onClick={() => { setCurrentPage("mentor"); setAiOpen(false); setSidebarOpen(false); }}><span className="nav-icon">✧</span>AI Mentor Chat</button>
-          <button className={`nav-item ${currentPage === "documentation" ? "active" : ""}`} onClick={() => { setCurrentPage("documentation"); setSidebarOpen(false); }}><span className="nav-icon">📄</span>Documentation Hub</button>
-          <button className={`nav-item ${currentPage === "settings" ? "active" : ""}`} onClick={() => { setCurrentPage("settings"); setSidebarOpen(false); }}><span className="nav-icon">⚙</span>Settings</button>
-
-          <div className="sidebar-bottom">
-            <div className="help-card">
-              <p className="help-title">NEED HELP?</p>
-
-              <div className="help-content">
-                <div className="mentor-bot">
-                  <svg viewBox="0 0 100 100" className="mentor-bot-svg">
-                    <defs>
-                      <linearGradient
-                        id="botHead"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#3ad4ff" />
-                        <stop offset="100%" stopColor="#8a3bff" />
-                      </linearGradient>
-                    </defs>
-
-                    <line
-                      x1="50"
-                      y1="8"
-                      x2="50"
-                      y2="18"
-                      stroke="url(#botHead)"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="50" cy="6" r="4" fill="#3ad4ff" />
-                    <rect
-                      x="20"
-                      y="18"
-                      width="60"
-                      height="46"
-                      rx="16"
-                      fill="#0a1330"
-                      stroke="url(#botHead)"
-                      strokeWidth="3"
-                    />
-                    <rect
-                      x="30"
-                      y="30"
-                      width="16"
-                      height="18"
-                      rx="8"
-                      fill="#0a1330"
-                      stroke="#4ce0ff"
-                      strokeWidth="2.5"
-                    />
-                    <circle cx="38" cy="39" r="3.5" fill="#4ce0ff" />
-                    <rect
-                      x="54"
-                      y="30"
-                      width="16"
-                      height="18"
-                      rx="8"
-                      fill="#0a1330"
-                      stroke="#4ce0ff"
-                      strokeWidth="2.5"
-                    />
-                    <circle cx="62" cy="39" r="3.5" fill="#4ce0ff" />
-                    <path
-                      d="M38 54 Q50 60 62 54"
-                      stroke="#c86bff"
-                      strokeWidth="3"
-                      fill="none"
-                      strokeLinecap="round"
-                    />
-                    <rect
-                      x="12"
-                      y="34"
-                      width="8"
-                      height="14"
-                      rx="4"
-                      fill="url(#botHead)"
-                    />
-                    <rect
-                      x="80"
-                      y="34"
-                      width="8"
-                      height="14"
-                      rx="4"
-                      fill="url(#botHead)"
-                    />
-                    <rect
-                      x="28"
-                      y="68"
-                      width="44"
-                      height="24"
-                      rx="10"
-                      fill="#0a1330"
-                      stroke="url(#botHead)"
-                      strokeWidth="3"
-                    />
-                    <circle cx="50" cy="80" r="4" fill="#4ce0ff" />
-                  </svg>
-                </div>
-
-                <p>
-                  Our AI Mentor is here to guide you through every step of your
-                  project journey.
-                </p>
-              </div>
-
-              <button className="help-button" onClick={() => setAiOpen(true)}>
-                Get AI Assistance <span>→</span>
-              </button>
-            </div>
-
-            <div className="weather">
-              <span className="weather-icon">☁️</span>
-              <div>
-                <strong>28°C</strong>
-                <span>Mostly Clear</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <main className="main-content">
-          <header className="top-header redesigned-header">
-            <div className="top-search"><span>⌕</span><input aria-label="Search" placeholder="Search projects, agents, or anything..." onKeyDown={(e) => { if (e.key === "Enter" && e.currentTarget.value.trim()) alert(`Search: ${e.currentTarget.value}`); }} /></div>
-            <div className="header-actions"><button className="notification" onClick={() => alert("You're all caught up!")} aria-label="Notifications">♧<i></i></button><button className="student-profile" onClick={() => setCurrentPage("profile")}><span className="avatar">{(formData.name || "SG").slice(0, 2).toUpperCase()}</span><span><strong>{formData.name || auth?.name || "Student"}</strong><small>Student</small></span><span>⌄</span></button></div>
-          </header>
-          <div className="dashboard-welcome"><div><span>Welcome back, {formData.name || auth?.name || "there"}!</span><h1>{currentPage === "dashboard" ? "Student Dashboard" : currentPage === "progress" ? "Progress Tracking" : currentPage === "faculty" ? "Faculty Dashboard" : currentPage === "technology" ? "Technology Recommendation" : currentPage === "risk" ? "Risk Assessment & Mitigation" : currentPage === "documentation" ? "Documentation Generation Hub" : currentPage === "profile" ? "Student Profile" : currentPage === "project" ? "Project Submission" : currentPage === "review" ? "Project Roadmap" : currentPage === "settings" ? "Settings" : currentPage === "mentor" ? "Conversational AI Mentor" : "AI Agents"}</h1><p>{currentPage === "faculty" ? "Monitor student progress, project health, weekly task checklist and auto-generated mentor summaries." : currentPage === "agents" ? "Run your AI agents in order — Technology, Risk Assessment, and Progress Tracking." : currentPage === "risk" ? "Evaluate execution blockers, technical pitfalls, and mitigation strategies." : currentPage === "documentation" ? "Generate formal academic Synopsis, Methodology, and Progress Reports with one click." : currentPage === "settings" ? "Manage your profile, appearance, notifications and AI Mentor preferences." : currentPage === "mentor" ? "Your personal academic project guide — ask questions, debug blockers, and track weekly progress." : "Track your progress, manage your project, and get AI-powered guidance all in one place."}</p></div></div>
-
-          {(currentPage === "profile" || currentPage === "project") && (
-            <div className="onboarding-steps">
-              <div className={`onboarding-step ${currentPage === "profile" ? "active" : "done"}`}>
-                <div className="onboarding-step-icon">1</div>
-                <div className="onboarding-step-title">Profile</div>
-                <div className="onboarding-step-subtitle">Tell us about you</div>
-              </div>
-
-              <div className={`onboarding-step-line ${currentPage === "project" ? "filled" : ""}`}></div>
-
-              <div className={`onboarding-step ${currentPage === "project" ? "active" : ""}`}>
-                <div className="onboarding-step-icon">2</div>
-                <div className="onboarding-step-title">Project</div>
-                <div className="onboarding-step-subtitle">Share your idea</div>
-              </div>
-
-              <div className="onboarding-step-line"></div>
-
-              <div className="onboarding-step">
-                <div className="onboarding-step-icon">✓</div>
-                <div className="onboarding-step-title">Complete</div>
-                <div className="onboarding-step-subtitle">Review &amp; finish</div>
-              </div>
-            </div>
-          )}
-
-          {/* --------------------------------------------------
+        {/* --------------------------------------------------
             STUDENT PROFILE
         -------------------------------------------------- */}
-          {currentPage === "profile" && (
-            <section className="glass-card profile-card-large">
-              <div className="card-heading">
-                <div className="section-icon">♙</div>
-                <div>
-                  <div className="section-number">SECTION 01</div>
-                  <h2>Build your academic profile</h2>
-                  <p>
-                    Provide your academic background and technical skills so we
-                    can offer relevant project guidance.
-                  </p>
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="input-group">
-                  <label>Full Name *</label>
-                  <div className="input-wrap">
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleProfileChange}
-                      placeholder="Enter your name"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <label>Department *</label>
-                  <div className="input-wrap">
-                    <input
-                      type="text"
-                      name="department"
-                      value={formData.department}
-                      onChange={handleProfileChange}
-                      placeholder="e.g. CSE / CSM"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-group full">
-                  <label>Academic Year *</label>
-                  <div className="input-wrap">
-                    <select
-                      name="year"
-                      value={formData.year}
-                      onChange={handleProfileChange}
-                    >
-                      <option value="">Select year</option>
-                      <option value="1st Year">1st Year</option>
-                      <option value="2nd Year">2nd Year</option>
-                      <option value="3rd Year">3rd Year</option>
-                      <option value="4th Year">4th Year</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="input-group full">
-                  <label>Technical Skills</label>
-                  <p className="field-hint">Select the technologies you are familiar with</p>
-                  <div className="skills-grid">
-                    {skills.map((skill) => (
-                      <button
-                        type="button"
-                        key={skill.id}
-                        className={`skill-card ${selectedSkills.includes(skill.id) ? "selected" : ""
-                          }`}
-                        onClick={() => toggleSkill(skill.id)}
-                      >
-                        <span className="skill-icon">{skill.icon}</span>
-                        <span>{skill.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="input-group full">
-                  <label>Academic Interests</label>
-                  <div className="input-wrap">
-                    <input
-                      type="text"
-                      name="interests"
-                      value={formData.interests}
-                      onChange={handleProfileChange}
-                      placeholder="AI, Web Development, etc."
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-footer">
-                <span></span>
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={handleContinue}
-                >
-                  Continue to Project
-                  <span className="button-arrow">→</span>
-                </button>
-              </div>
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            PROJECT SUBMISSION
-        -------------------------------------------------- */}
-          {currentPage === "project" && (
-            <section className="glass-card">
-              <div className="card-heading">
-                <div className="section-icon">▤</div>
-                <div>
-                  <div className="section-number">SECTION 02</div>
-                  <h2>Submit your project idea</h2>
-                  <p>
-                    Tell us about your project idea so our AI Mentor can
-                    provide personalized guidance.
-                  </p>
-                </div>
-              </div>
-
-              <div className="form-grid">
-                <div className="input-group">
-                  <label>Project Title *</label>
-                  <div className="input-wrap">
-                    <input
-                      type="text"
-                      name="title"
-                      value={projectData.title}
-                      onChange={handleProjectChange}
-                      placeholder="e.g. AI Based Student Attendance System"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <label>Project Category *</label>
-                  <div className="input-wrap">
-                    <select
-                      name="category"
-                      value={projectData.category}
-                      onChange={handleProjectChange}
-                    >
-                      <option value="">Select category</option>
-                      <option value="Artificial Intelligence">Artificial Intelligence</option>
-                      <option value="Machine Learning">Machine Learning</option>
-                      <option value="Web Development">Web Development</option>
-                      <option value="Data Science">Data Science</option>
-                      <option value="IoT">IoT</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="input-group selected-technologies-display">
-                  <label>Selected Technologies</label>
-                  <div className="tech-tags">
-                    {selectedSkills.length > 0
-                      ? selectedSkills.join(", ")
-                      : "No skills selected yet"}
-                  </div>
-                </div>
-
-                <div className="input-group full">
-                  <label>Project Description *</label>
-                  <div className="input-wrap">
-                    <textarea
-                      name="description"
-                      value={projectData.description}
-                      onChange={handleProjectChange}
-                      placeholder="Explain what your project will do..."
-                      rows="5"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div className="input-group full">
-                  <label>Project Objective</label>
-                  <div className="input-wrap">
-                    <textarea
-                      name="objective"
-                      value={projectData.objective}
-                      onChange={handleProjectChange}
-                      placeholder="What is the main objective of your project?"
-                      rows="4"
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-
-              {technologyError && (
-                <div className="error-message">
-                  ⚠️ {technologyError}
-                </div>
-              )}
-
-              <div className="form-footer">
-                <button type="button" onClick={() => setCurrentPage("profile")}>
-                  ← Back to Profile
-                </button>
-
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={handleProjectContinue}
-                >
-                  Continue to Review
-                  <span className="button-arrow">→</span>
-                </button>
-              </div>
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            REVIEW & COMPLETE
-        -------------------------------------------------- */}
-          {currentPage === "review" && (
-            <section className="glass-card">
-              <div className="card-heading">
-                <div className="section-icon">✓</div>
-                <div>
-                  <div className="section-number">SECTION 03</div>
-                  <h2>Review & Complete</h2>
-                  <p>
-                    Your academic profile and project idea are ready for review.
-                  </p>
-                </div>
-              </div>
-
-              <div className="review-details">
-                <p><strong>Student Name :</strong> {formData.name}</p>
-                <p><strong>Department :</strong> {formData.department}</p>
-                <p><strong>Academic Year :</strong> {formData.year}</p>
-                <p><strong>Project Title :</strong> {projectData.title}</p>
-                <p><strong>Project Category :</strong> {projectData.category}</p>
+        {currentPage === "profile" && (
+          <section className="glass-card profile-card-large">
+            <div className="card-heading">
+              <div className="section-icon">♙</div>
+              <div>
+                <div className="section-number">SECTION 01</div>
+                <h2>Build your academic profile</h2>
                 <p>
-                  <strong>Technical Skills :</strong>{" "}
-                  {selectedSkills.length > 0
-                    ? selectedSkills.join(", ")
-                    : "No skills selected"}
+                  Provide your academic background and technical skills so we
+                  can offer relevant project guidance.
                 </p>
               </div>
+            </div>
 
-              <div className="form-footer">
-                <button type="button" onClick={() => setCurrentPage("project")}>
-                  ← Back to Project
-                </button>
-
-                <button
-                  type="button"
-                  className="primary-button"
-                  onClick={handleViewRecommendation}
-                >
-                  View Recommendation
-                  <span className="button-arrow">→</span>
-                </button>
+            <div className="form-grid">
+              <div className="input-group">
+                <label>Full Name *</label>
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleProfileChange}
+                    placeholder="Enter your name"
+                  />
+                </div>
               </div>
-            </section>
-          )}
 
-          {/* --------------------------------------------------
+              <div className="input-group">
+                <label>Department *</label>
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleProfileChange}
+                    placeholder="e.g. CSE / CSM"
+                  />
+                </div>
+              </div>
+
+              <div className="input-group full">
+                <label>Academic Year *</label>
+                <div className="input-wrap">
+                  <select
+                    name="year"
+                    value={formData.year}
+                    onChange={handleProfileChange}
+                  >
+                    <option value="">Select year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="input-group full">
+                <label>Technical Skills</label>
+                <p className="field-hint">Select the technologies you are familiar with</p>
+                <div className="skills-grid">
+                  {skills.map((skill) => (
+                    <button
+                      type="button"
+                      key={skill.id}
+                      className={`skill-card ${
+                        selectedSkills.includes(skill.id) ? "selected" : ""
+                      }`}
+                      onClick={() => toggleSkill(skill.id)}
+                    >
+                      <span className="skill-icon">{skill.icon}</span>
+                      <span>{skill.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="input-group full">
+                <label>Academic Interests</label>
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    name="interests"
+                    value={formData.interests}
+                    onChange={handleProfileChange}
+                    placeholder="AI, Web Development, etc."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="form-footer">
+              <span></span>
+              <button
+                type="button"
+                className="primary-button"
+                onClick={handleContinue}
+              >
+                Continue to Project
+                <span className="button-arrow">→</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            PROJECT SUBMISSION
+        -------------------------------------------------- */}
+        {currentPage === "project" && (
+          <section className="glass-card">
+            <div className="card-heading">
+              <div className="section-icon">▤</div>
+              <div>
+                <div className="section-number">SECTION 02</div>
+                <h2>Submit your project idea</h2>
+                <p>
+                  Tell us about your project idea so our AI Mentor can
+                  provide personalized guidance.
+                </p>
+              </div>
+            </div>
+
+            <div className="form-grid">
+              <div className="input-group">
+                <label>Project Title *</label>
+                <div className="input-wrap">
+                  <input
+                    type="text"
+                    name="title"
+                    value={projectData.title}
+                    onChange={handleProjectChange}
+                    placeholder="e.g. AI Based Student Attendance System"
+                  />
+                </div>
+              </div>
+
+              <div className="input-group">
+                <label>Project Category *</label>
+                <div className="input-wrap">
+                  <select
+                    name="category"
+                    value={projectData.category}
+                    onChange={handleProjectChange}
+                  >
+                    <option value="">Select category</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="IoT">IoT</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="input-group selected-technologies-display">
+                <label>Selected Technologies</label>
+                <div className="tech-tags">
+                  {selectedSkills.length > 0
+                    ? selectedSkills.join(", ")
+                    : "No skills selected yet"}
+                </div>
+              </div>
+
+              <div className="input-group full">
+                <label>Project Description *</label>
+                <div className="input-wrap">
+                  <textarea
+                    name="description"
+                    value={projectData.description}
+                    onChange={handleProjectChange}
+                    placeholder="Explain what your project will do..."
+                    rows="5"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div className="input-group full">
+                <label>Project Objective</label>
+                <div className="input-wrap">
+                  <textarea
+                    name="objective"
+                    value={projectData.objective}
+                    onChange={handleProjectChange}
+                    placeholder="What is the main objective of your project?"
+                    rows="4"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            {technologyError && (
+              <div className="error-message">
+                ⚠️ {technologyError}
+              </div>
+            )}
+
+            <div className="form-footer">
+              <button type="button" onClick={() => setCurrentPage("profile")}>
+                ← Back to Profile
+              </button>
+
+              <button
+                type="button"
+                className="primary-button"
+                onClick={handleProjectContinue}
+              >
+                Continue to Review
+                <span className="button-arrow">→</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            REVIEW & COMPLETE
+        -------------------------------------------------- */}
+        {currentPage === "review" && (
+          <section className="glass-card">
+            <div className="card-heading">
+              <div className="section-icon">✓</div>
+              <div>
+                <div className="section-number">SECTION 03</div>
+                <h2>Review & Complete</h2>
+                <p>
+                  Your academic profile and project idea are ready for review.
+                </p>
+              </div>
+            </div>
+
+            <div className="review-details">
+              <p><strong>Student Name :</strong> {formData.name}</p>
+              <p><strong>Department :</strong> {formData.department}</p>
+              <p><strong>Academic Year :</strong> {formData.year}</p>
+              <p><strong>Project Title :</strong> {projectData.title}</p>
+              <p><strong>Project Category :</strong> {projectData.category}</p>
+              <p>
+                <strong>Technical Skills :</strong>{" "}
+                {selectedSkills.length > 0
+                  ? selectedSkills.join(", ")
+                  : "No skills selected"}
+              </p>
+            </div>
+
+            <div className="form-footer">
+              <button type="button" onClick={() => setCurrentPage("project")}>
+                ← Back to Project
+              </button>
+
+              <button
+                type="button"
+                className="primary-button"
+                onClick={handleViewRecommendation}
+              >
+                View Recommendation
+                <span className="button-arrow">→</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
             PROGRESS TRACKING - MILESTONE 3
             Percentage is calculated automatically by backend.
         -------------------------------------------------- */}
-          {currentPage === "progress" && (
-            <section className="glass-card progress-page-card">
-              <div className="card-heading">
-                <div className="section-icon">◔</div>
-                <div>
-                  <div className="section-number">MILESTONE 03</div>
-                  <h2>Project Progress Tracking</h2>
-                  <p>
-                    Submit your weekly work. Your progress percentage is calculated
-                    automatically from completed and pending tasks.
-                  </p>
-                </div>
+        {currentPage === "progress" && (
+          <section className="glass-card progress-page-card">
+            <div className="card-heading">
+              <div className="section-icon">◔</div>
+              <div>
+                <div className="section-number">MILESTONE 03</div>
+                <h2>Project Progress Tracking</h2>
+                <p>
+                  Submit your weekly work. Your progress percentage is calculated
+                  automatically from completed and pending tasks.
+                </p>
               </div>
+            </div>
 
-              <div className="progress-summary-grid">
-                <div className="progress-stat-box">
-                  <span>PROJECT</span>
-                  <strong>{projectData.title || "Not submitted"}</strong>
-                </div>
-                <div className="progress-stat-box">
-                  <span>WEEK</span>
-                  <strong>{progressResult?.week || progressData.week || "Not updated"}</strong>
-                </div>
-                <div className="progress-stat-box">
-                  <span>STATUS</span>
-                  <strong>{progressResult?.status || "Waiting for update"}</strong>
-                </div>
+            <div className="progress-summary-grid">
+              <div className="progress-stat-box">
+                <span>PROJECT</span>
+                <strong>{projectData.title || "Not submitted"}</strong>
               </div>
+              <div className="progress-stat-box">
+                <span>WEEK</span>
+                <strong>{progressResult?.week || progressData.week || "Not updated"}</strong>
+              </div>
+              <div className="progress-stat-box">
+                <span>STATUS</span>
+                <strong>{progressResult?.status || "Waiting for update"}</strong>
+              </div>
+            </div>
 
-              {timelineLoading && (
-                <div
-                  className="progress-result-box"
-                  style={{ marginBottom: "18px" }}
-                >
-                  Loading your M2 week-wise project plan...
-                </div>
-              )}
+            {timelineLoading && (
+              <div
+                className="progress-result-box"
+                style={{ marginBottom: "18px" }}
+              >
+                Loading your M2 week-wise project plan...
+              </div>
+            )}
 
-              {timelineError && (
-                <div
-                  className="progress-error"
-                  style={{ marginBottom: "18px" }}
-                >
-                  ⚠️ {timelineError}
-                </div>
-              )}
+            {timelineError && (
+              <div
+                className="progress-error"
+                style={{ marginBottom: "18px" }}
+              >
+                ⚠️ {timelineError}
+              </div>
+            )}
 
-              {getWeekPlan(progressData.week) && (
-                <div
-                  className="progress-result-box"
-                  style={{ marginBottom: "18px" }}
-                >
-                  <h3>✓ Week Plan</h3>
-                  <p>
-                    <strong>{getWeekPlan(progressData.week).milestone}</strong>
-                  </p>
-                  <p style={{ marginBottom: "8px" }}>
-                    Tasks planned for {progressData.week}:
-                  </p>
-                  <ul style={{ marginTop: 0, paddingLeft: "20px" }}>
-                    {getWeekPlan(progressData.week).tasks?.map((task, index) => (
-                      <li key={index} style={{ marginBottom: "6px" }}>
-                        {task}
-                      </li>
+            {getWeekPlan(progressData.week) && (
+              <div
+                className="progress-result-box"
+                style={{ marginBottom: "18px" }}
+              >
+                <h3>✓ Week Plan</h3>
+                <p>
+                  <strong>{getWeekPlan(progressData.week).milestone}</strong>
+                </p>
+                <p style={{ marginBottom: "8px" }}>
+                  Tasks planned for {progressData.week}:
+                </p>
+                <ul style={{ marginTop: 0, paddingLeft: "20px" }}>
+                  {getWeekPlan(progressData.week).tasks?.map((task, index) => (
+                    <li key={index} style={{ marginBottom: "6px" }}>
+                      {task}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <form className="progress-form-grid" onSubmit={handleProgressSubmit}>
+              <div className="input-group">
+                <label>Week *</label>
+                <div className="input-wrap">
+                  <select
+                    name="week"
+                    value={progressData.week}
+                    onChange={handleProgressChange}
+                  >
+                    <option value="">Select week</option>
+                    {timelineData?.weekly_plan?.map((weekPlan) => (
+                      <option
+                        key={weekPlan.week}
+                        value={`Week ${weekPlan.week}`}
+                      >
+                        Week {weekPlan.week}
+                      </option>
                     ))}
-                  </ul>
+                  </select>
                 </div>
-              )}
+              </div>
 
-              <form className="progress-form-grid" onSubmit={handleProgressSubmit}>
-                <div className="input-group">
-                  <label>Week *</label>
-                  <div className="input-wrap">
-                    <select
-                      name="week"
-                      value={progressData.week}
-                      onChange={handleProgressChange}
-                    >
-                      <option value="">Select week</option>
-                      {timelineData?.weekly_plan?.map((weekPlan) => (
-                        <option
-                          key={weekPlan.week}
-                          value={`Week ${weekPlan.week}`}
-                        >
-                          Week {weekPlan.week}
+              <div className="input-group">
+                <label>Current Task *</label>
+                <div className="input-wrap">
+                  <select
+                    name="currentTask"
+                    value={progressData.currentTask}
+                    onChange={handleProgressChange}
+                    disabled={!getWeekPlan(progressData.week)?.tasks?.length}
+                  >
+                    <option value="">Select current task</option>
+                    {(getWeekPlan(progressData.week)?.tasks || []).map(
+                      (task, index) => (
+                        <option key={index} value={task}>
+                          {task}
                         </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <label>Current Task *</label>
-                  <div className="input-wrap">
-                    <select
-                      name="currentTask"
-                      value={progressData.currentTask}
-                      onChange={handleProgressChange}
-                      disabled={!getWeekPlan(progressData.week)?.tasks?.length}
-                    >
-                      <option value="">Select current task</option>
-                      {(getWeekPlan(progressData.week)?.tasks || []).map(
-                        (task, index) => (
-                          <option key={index} value={task}>
-                            {task}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <label>Completed Tasks *</label>
-                  <div className="input-wrap">
-                    <textarea
-                      name="completedTasks"
-                      value={progressData.completedTasks}
-                      onChange={handleProgressChange}
-                      placeholder="Enter completed tasks. Separate multiple tasks with commas or new lines."
-                      rows="3"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-group">
-                  <label>Pending Tasks</label>
-                  <div className="input-wrap">
-                    <textarea
-                      name="pendingTasks"
-                      value={progressData.pendingTasks}
-                      onChange={handleProgressChange}
-                      placeholder="Enter pending tasks."
-                      rows="3"
-                    />
-                  </div>
-                </div>
-
-                <div className="input-group progress-full">
-                  <label>Problems Faced</label>
-                  <div className="input-wrap">
-                    <textarea
-                      name="problems"
-                      value={progressData.problems}
-                      onChange={handleProgressChange}
-                      placeholder="Mention blockers or problems you faced."
-                      rows="3"
-                    />
-                  </div>
-                </div>
-
-                <div className="progress-actions progress-full">
-                  <button
-                    type="button"
-                    onClick={() => setCurrentPage("dashboard")}
-                  >
-                    ← Back to Dashboard
-                  </button>
-
-                  <button
-                    type="submit"
-                    className="primary-button"
-                    disabled={progressLoading}
-                  >
-                    {progressLoading
-                      ? "Calculating Progress..."
-                      : "Submit Weekly Progress"}
-                    <span className="button-arrow">→</span>
-                  </button>
-                </div>
-              </form>
-
-              {progressError && (
-                <div className="progress-error">
-                  ⚠️ {progressError}
-                </div>
-              )}
-
-              {progressResult && (
-                <div className="progress-result-box">
-                  <h3>✓ Automatic Progress Result</h3>
-                  <p>
-                    <strong>{progressResult.week}</strong> —{" "}
-                    {progressResult.current_task}
-                  </p>
-
-                  <div className="backend-progress-track">
-                    <div
-                      className="backend-progress-fill"
-                      style={{
-                        width: `${progressResult.progress_percentage}%`,
-                      }}
-                    ></div>
-                  </div>
-
-                  <div className="progress-percent">
-                    {progressResult.progress_percentage}%
-                  </div>
-
-                  <div className="progress-result-grid">
-                    <div className="result-mini">
-                      <span>Status</span>
-                      <strong>{progressResult.status}</strong>
-                    </div>
-                    <div className="result-mini">
-                      <span>Completed</span>
-                      <strong>{progressResult.completed_count}</strong>
-                    </div>
-                    <div className="result-mini">
-                      <span>Pending</span>
-                      <strong>{progressResult.pending_count}</strong>
-                    </div>
-                    <div className="result-mini">
-                      <span>Total Tasks</span>
-                      <strong>{progressResult.total_tasks}</strong>
-                    </div>
-                  </div>
-
-                  <p style={{ marginTop: "14px" }}>
-                    <strong>Problems:</strong>{" "}
-                    {progressResult.problems || "No problems reported"}
-                  </p>
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            PROGRESS REPORT - MILESTONE 3
-            Opens automatically after Submit Weekly Progress.
-        -------------------------------------------------- */}
-          {currentPage === "progress-report" && progressResult && (
-            <section className="glass-card progress-report-page">
-              <div className="card-heading">
-                <div className="section-icon">◔</div>
-                <div>
-                  <div className="section-number">MILESTONE 03</div>
-                  <h2>Weekly Progress Report</h2>
-                  <p>Your weekly progress has been calculated automatically.</p>
+                      )
+                    )}
+                  </select>
                 </div>
               </div>
 
-              <div className="progress-report-top">
-                <div className="progress-report-info">
-                  <span>WEEK</span>
-                  <strong>{progressResult.week}</strong>
-                </div>
-                <div className="progress-report-info">
-                  <span>CURRENT TASK</span>
-                  <strong>{progressResult.current_task}</strong>
-                </div>
-                <div className="progress-report-info">
-                  <span>STATUS</span>
-                  <strong>{progressResult.status}</strong>
+              <div className="input-group">
+                <label>Completed Tasks *</label>
+                <div className="input-wrap">
+                  <textarea
+                    name="completedTasks"
+                    value={progressData.completedTasks}
+                    onChange={handleProgressChange}
+                    placeholder="Enter completed tasks. Separate multiple tasks with commas or new lines."
+                    rows="3"
+                  />
                 </div>
               </div>
 
-              <div className="progress-graphs-grid">
-                <div className="progress-graph-card">
-                  <h3>Overall Progress</h3>
-                  <div className="progress-circle-wrap">
-                    <div
-                      className="progress-circle"
-                      style={{
-                        background: `conic-gradient(from -90deg, #43e2c1 0%, #8a63ff ${progressResult.progress_percentage}%, rgba(255,255,255,0.08) ${progressResult.progress_percentage}% 100%)`,
-                      }}
-                    >
-                      <div className="progress-circle-inner">
-                        <strong>{progressResult.progress_percentage}%</strong>
-                        <span>Completed</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="progress-graph-card">
-                  <h3>Task Progress</h3>
-                  <div className="task-bar-chart">
-                    <div className="task-bar-row">
-                      <div className="task-bar-label">
-                        <span>Completed</span>
-                        <strong>{progressResult.completed_count}</strong>
-                      </div>
-                      <div className="task-bar-track">
-                        <div
-                          className="task-bar-fill completed"
-                          style={{
-                            width: `${progressResult.total_tasks > 0 ? (progressResult.completed_count / progressResult.total_tasks) * 100 : 0}%`,
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div className="task-bar-row">
-                      <div className="task-bar-label">
-                        <span>Pending</span>
-                        <strong>{progressResult.pending_count}</strong>
-                      </div>
-                      <div className="task-bar-track">
-                        <div
-                          className="task-bar-fill pending"
-                          style={{
-                            width: `${progressResult.total_tasks > 0 ? (progressResult.pending_count / progressResult.total_tasks) * 100 : 0}%`,
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="progress-chart-summary">
-                    <div><span>Total Tasks</span><strong>{progressResult.total_tasks}</strong></div>
-                    <div><span>Completed</span><strong>{progressResult.completed_count}</strong></div>
-                    <div><span>Pending</span><strong>{progressResult.pending_count}</strong></div>
-                  </div>
+              <div className="input-group">
+                <label>Pending Tasks</label>
+                <div className="input-wrap">
+                  <textarea
+                    name="pendingTasks"
+                    value={progressData.pendingTasks}
+                    onChange={handleProgressChange}
+                    placeholder="Enter pending tasks."
+                    rows="3"
+                  />
                 </div>
               </div>
 
-              <div className="progress-report-problems">
-                <strong>Problems Faced</strong>
-                <p>{progressResult.problems || "No problems reported"}</p>
+              <div className="input-group progress-full">
+                <label>Problems Faced</label>
+                <div className="input-wrap">
+                  <textarea
+                    name="problems"
+                    value={progressData.problems}
+                    onChange={handleProgressChange}
+                    placeholder="Mention blockers or problems you faced."
+                    rows="3"
+                  />
+                </div>
               </div>
 
-              {adjustedPlan && (
-                <div
-                  style={{
-                    background: "rgba(235, 130, 60, 0.12)",
-                    border: "1px solid rgba(235, 130, 60, 0.35)",
-                    borderRadius: "10px",
-                    padding: "18px",
-                    margin: "18px 0"
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#fb923c", fontWeight: "700", marginBottom: "6px" }}>
-                    <span>⚡ AI Mentor Plan Adjustment Triggered (Milestone 3)</span>
-                  </div>
-                  <p style={{ margin: "0 0 10px 0", color: "#fdba74", fontSize: "13px" }}>
-                    {adjustedPlan.message || "Because delayed or pending tasks were reported, your project plan has been dynamically recalibrated to maintain feasibility."}
-                  </p>
-                  {adjustedPlan.delayed_tasks?.length > 0 && (
-                    <div style={{ fontSize: "12px", color: "#ffedd5" }}>
-                      <strong>Rescheduled Tasks (Moved forward):</strong>
-                      <ul style={{ margin: "4px 0", paddingLeft: "20px" }}>
-                        {adjustedPlan.delayed_tasks.map((d, idx) => (
-                          <li key={idx}>Task "{d.task}" moved to next sprint</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {adjustedPlan.affected_tasks?.length > 0 && (
-                    <div style={{ fontSize: "12px", color: "#fca5a5", marginTop: "8px" }}>
-                      <strong>Affected Downstream Dependencies:</strong>
-                      <ul style={{ margin: "4px 0", paddingLeft: "20px" }}>
-                        {adjustedPlan.affected_tasks.map((a, idx) => (
-                          <li key={idx}>Week {a.week}: "{a.task}" ({a.reason})</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div className="form-footer">
-                <button type="button" onClick={() => setCurrentPage("progress")}>
-                  ← Back to Progress Tracking
-                </button>
+              <div className="progress-actions progress-full">
                 <button
                   type="button"
-                  className="primary-button"
                   onClick={() => setCurrentPage("dashboard")}
                 >
-                  Go to Dashboard
+                  ← Back to Dashboard
+                </button>
+
+                <button
+                  type="submit"
+                  className="primary-button"
+                  disabled={progressLoading}
+                >
+                  {progressLoading
+                    ? "Calculating Progress..."
+                    : "Submit Weekly Progress"}
                   <span className="button-arrow">→</span>
                 </button>
               </div>
-            </section>
-          )}
+            </form>
 
-          {/* --------------------------------------------------
-            TECHNOLOGY RECOMMENDATION
+            {progressError && (
+              <div className="progress-error">
+                ⚠️ {progressError}
+              </div>
+            )}
+
+            {progressResult && (
+              <div className="progress-result-box">
+                <h3>✓ Automatic Progress Result</h3>
+                <p>
+                  <strong>{progressResult.week}</strong> —{" "}
+                  {progressResult.current_task}
+                </p>
+
+                <div className="backend-progress-track">
+                  <div
+                    className="backend-progress-fill"
+                    style={{
+                      width: `${progressResult.progress_percentage}%`,
+                    }}
+                  ></div>
+                </div>
+
+                <div className="progress-percent">
+                  {progressResult.progress_percentage}%
+                </div>
+
+                <div className="progress-result-grid">
+                  <div className="result-mini">
+                    <span>Status</span>
+                    <strong>{progressResult.status}</strong>
+                  </div>
+                  <div className="result-mini">
+                    <span>Completed</span>
+                    <strong>{progressResult.completed_count}</strong>
+                  </div>
+                  <div className="result-mini">
+                    <span>Pending</span>
+                    <strong>{progressResult.pending_count}</strong>
+                  </div>
+                  <div className="result-mini">
+                    <span>Total Tasks</span>
+                    <strong>{progressResult.total_tasks}</strong>
+                  </div>
+                </div>
+
+                <p style={{ marginTop: "14px" }}>
+                  <strong>Problems:</strong>{" "}
+                  {progressResult.problems || "No problems reported"}
+                </p>
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            PROGRESS REPORT - MILESTONE 3
+            Opens automatically after Submit Weekly Progress.
         -------------------------------------------------- */}
-          {currentPage === "technology" && (
-            <section className="glass-card">
-              <div className="card-heading">
-                <div className="section-icon">⚙</div>
-                <div>
-                  <div className="section-number">SECTION 04</div>
-                  <h2>Technology Recommendation</h2>
-                  <p>Recommended technologies generated by the Technology Stack Recommendation Agent.</p>
+        {currentPage === "progress-report" && progressResult && (
+          <section className="glass-card progress-report-page">
+            <div className="card-heading">
+              <div className="section-icon">◔</div>
+              <div>
+                <div className="section-number">MILESTONE 03</div>
+                <h2>Weekly Progress Report</h2>
+                <p>Your weekly progress has been calculated automatically.</p>
+              </div>
+            </div>
+
+            <div className="progress-report-top">
+              <div className="progress-report-info">
+                <span>WEEK</span>
+                <strong>{progressResult.week}</strong>
+              </div>
+              <div className="progress-report-info">
+                <span>CURRENT TASK</span>
+                <strong>{progressResult.current_task}</strong>
+              </div>
+              <div className="progress-report-info">
+                <span>STATUS</span>
+                <strong>{progressResult.status}</strong>
+              </div>
+            </div>
+
+            <div className="progress-graphs-grid">
+              <div className="progress-graph-card">
+                <h3>Overall Progress</h3>
+                <div className="progress-circle-wrap">
+                  <div
+                    className="progress-circle"
+                    style={{
+                      background: `conic-gradient(from -90deg, #43e2c1 0%, #8a63ff ${progressResult.progress_percentage}%, rgba(255,255,255,0.08) ${progressResult.progress_percentage}% 100%)`,
+                    }}
+                  >
+                    <div className="progress-circle-inner">
+                      <strong>{progressResult.progress_percentage}%</strong>
+                      <span>Completed</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {technologyLoading && (
+              <div className="progress-graph-card">
+                <h3>Task Progress</h3>
+                <div className="task-bar-chart">
+                  <div className="task-bar-row">
+                    <div className="task-bar-label">
+                      <span>Completed</span>
+                      <strong>{progressResult.completed_count}</strong>
+                    </div>
+                    <div className="task-bar-track">
+                      <div
+                        className="task-bar-fill completed"
+                        style={{
+                          width: `${progressResult.total_tasks > 0 ? (progressResult.completed_count / progressResult.total_tasks) * 100 : 0}%`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="task-bar-row">
+                    <div className="task-bar-label">
+                      <span>Pending</span>
+                      <strong>{progressResult.pending_count}</strong>
+                    </div>
+                    <div className="task-bar-track">
+                      <div
+                        className="task-bar-fill pending"
+                        style={{
+                          width: `${progressResult.total_tasks > 0 ? (progressResult.pending_count / progressResult.total_tasks) * 100 : 0}%`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="progress-chart-summary">
+                  <div><span>Total Tasks</span><strong>{progressResult.total_tasks}</strong></div>
+                  <div><span>Completed</span><strong>{progressResult.completed_count}</strong></div>
+                  <div><span>Pending</span><strong>{progressResult.pending_count}</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="progress-report-problems">
+              <strong>Problems Faced</strong>
+              <p>{progressResult.problems || "No problems reported"}</p>
+            </div>
+
+            {adjustedPlan && (
+              <div
+                style={{
+                  background: "rgba(235, 130, 60, 0.12)",
+                  border: "1px solid rgba(235, 130, 60, 0.35)",
+                  borderRadius: "10px",
+                  padding: "18px",
+                  margin: "18px 0"
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#fb923c", fontWeight: "700", marginBottom: "6px" }}>
+                  <span>⚡ AI Mentor Plan Adjustment Triggered (Milestone 3)</span>
+                </div>
+                <p style={{ margin: "0 0 10px 0", color: "#fdba74", fontSize: "13px" }}>
+                  {adjustedPlan.message || "Because delayed or pending tasks were reported, your project plan has been dynamically recalibrated to maintain feasibility."}
+                </p>
+                {adjustedPlan.delayed_tasks?.length > 0 && (
+                  <div style={{ fontSize: "12px", color: "#ffedd5" }}>
+                    <strong>Rescheduled Tasks (Moved forward):</strong>
+                    <ul style={{ margin: "4px 0", paddingLeft: "20px" }}>
+                      {adjustedPlan.delayed_tasks.map((d, idx) => (
+                        <li key={idx}>Task "{d.task}" moved to next sprint</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {adjustedPlan.affected_tasks?.length > 0 && (
+                  <div style={{ fontSize: "12px", color: "#fca5a5", marginTop: "8px" }}>
+                    <strong>Affected Downstream Dependencies:</strong>
+                    <ul style={{ margin: "4px 0", paddingLeft: "20px" }}>
+                      {adjustedPlan.affected_tasks.map((a, idx) => (
+                        <li key={idx}>Week {a.week}: "{a.task}" ({a.reason})</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="form-footer">
+              <button type="button" onClick={() => setCurrentPage("progress")}>
+                ← Back to Progress Tracking
+              </button>
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => setCurrentPage("dashboard")}
+              >
+                Go to Dashboard
+                <span className="button-arrow">→</span>
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            TECHNOLOGY RECOMMENDATION
+        -------------------------------------------------- */}
+        {currentPage === "technology" && (
+          <section className="glass-card">
+            <div className="card-heading">
+              <div className="section-icon">⚙</div>
+              <div>
+                <div className="section-number">SECTION 04</div>
+                <h2>Technology Recommendation</h2>
+                <p>Recommended technologies generated by the Technology Stack Recommendation Agent.</p>
+              </div>
+            </div>
+
+            {technologyLoading && (
+              <div className="technology-result-section">
+                <div className="technology-result-heading">
+                  <span>🛠️</span>
+                  <div>
+                    <h3>Analyzing your project...</h3>
+                    <p>Please wait while the Technology Agent generates your recommendation.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {!technologyLoading && technologyError && (
+              <>
+                <div className="error-message">⚠️ {technologyError}</div>
+                <div className="form-footer">
+                  <button type="button" onClick={() => setCurrentPage("review")}>
+                    ← Back to Review
+                  </button>
+                  <button
+                    type="button"
+                    className="primary-button"
+                    onClick={handleViewRecommendation}
+                  >
+                    Try Again
+                    <span className="button-arrow">→</span>
+                  </button>
+                </div>
+              </>
+            )}
+
+            {!technologyLoading && !technologyError && technologyResult && (
+              <>
+                <div className="review-details">
+                  <p><strong>Project Title :</strong> {projectData.title}</p>
+                  <p><strong>Project Category :</strong> {projectData.category}</p>
+                </div>
+
                 <div className="technology-result-section">
                   <div className="technology-result-heading">
                     <span>🛠️</span>
                     <div>
-                      <h3>Analyzing your project...</h3>
-                      <p>Please wait while the Technology Agent generates your recommendation.</p>
+                      <h3>Recommended Technology Stack</h3>
+                      <p>Generated by the Technology Stack Recommendation Agent.</p>
                     </div>
+                  </div>
+
+                  <div className="technology-result">
+                    {renderTechStackCards(technologyResult)}
                   </div>
                 </div>
-              )}
 
-              {!technologyLoading && technologyError && (
-                <>
-                  <div className="error-message">⚠️ {technologyError}</div>
-                  <div className="form-footer">
-                    <button type="button" onClick={() => setCurrentPage("review")}>
-                      ← Back to Review
-                    </button>
-                    <button
-                      type="button"
-                      className="primary-button"
-                      onClick={handleViewRecommendation}
-                    >
-                      Try Again
-                      <span className="button-arrow">→</span>
-                    </button>
-                  </div>
-                </>
-              )}
+                <div className="form-footer">
+                  <button type="button" onClick={() => setCurrentPage("review")}>
+                    ← Back to Review
+                  </button>
+                  <button
+                    type="button"
+                    className="primary-button"
+                    onClick={handleCompleteOnboarding}
+                  >
+                    Complete &amp; Go to Progress Tracking →
+                  </button>
+                </div>
+              </>
+            )}
+          </section>
+        )}
 
-              {!technologyLoading && !technologyError && technologyResult && (
-                <>
-                  <div className="review-details">
-                    <p><strong>Project Title :</strong> {projectData.title}</p>
-                    <p><strong>Project Category :</strong> {projectData.category}</p>
-                  </div>
-
-                  <div className="technology-result-section">
-                    <div className="technology-result-heading">
-                      <span>🛠️</span>
-                      <div>
-                        <h3>Recommended Technology Stack</h3>
-                        <p>Generated by the Technology Stack Recommendation Agent.</p>
-                      </div>
-                    </div>
-
-                    <div className="technology-result">
-                      {renderTechStackCards(technologyResult)}
-                    </div>
-                  </div>
-
-                  <div className="form-footer">
-                    <button type="button" onClick={() => setCurrentPage("review")}>
-                      ← Back to Review
-                    </button>
-                    <button
-                      type="button"
-                      className="primary-button"
-                      onClick={handleCompleteOnboarding}
-                    >
-                      Complete &amp; Go to Progress Tracking →
-                    </button>
-                  </div>
-                </>
-              )}
-            </section>
-          )}
-
-          {/* --------------------------------------------------
+        {/* --------------------------------------------------
             AI AGENTS PAGE
         -------------------------------------------------- */}
-          {currentPage === "agents" && (
-            <section className="agents-page">
-              <div className="agents-flow-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
-                <article className={`agent-big ${technologyResult ? "done" : ""}`}>
-                  <span className="agent-step">MILESTONE 2</span>
-                  <div className="agent-big-head">
-                    <b className="agent-icon">◇</b>
-                    <div>
-                      <h2>Technology Recommendation Agent</h2>
-                      <em className={technologyResult ? "status-complete" : technologyLoading ? "status-running" : "status-pending"}>{techStatus}</em>
-                    </div>
+        {currentPage === "agents" && (
+          <section className="agents-page">
+            <div className="agents-flow-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
+              <article className={`agent-big ${technologyResult ? "done" : ""}`}>
+                <span className="agent-step">MILESTONE 2</span>
+                <div className="agent-big-head">
+                  <b className="agent-icon">◇</b>
+                  <div>
+                    <h2>Technology Recommendation Agent</h2>
+                    <em className={technologyResult ? "status-complete" : technologyLoading ? "status-running" : "status-pending"}>{techStatus}</em>
                   </div>
-                  <p>Analyzes your submitted project idea and suggests the best technology stack for frontend, backend, database and AI.</p>
-                  <ul className="agent-points">
-                    <li>Evaluates required programming language & frameworks</li>
-                    <li>Recommends optimal database and AI libraries</li>
-                    <li>Provides architectural justification for students</li>
-                  </ul>
-                  <button type="button" className="primary-button" disabled={technologyLoading} onClick={openTechnologyAgent}>
-                    {technologyLoading ? "Analyzing..." : technologyResult ? "View Tech Stack" : "Run Agent"}
-                    <span className="button-arrow">→</span>
-                  </button>
-                </article>
+                </div>
+                <p>Analyzes your submitted project idea and suggests the best technology stack for frontend, backend, database and AI.</p>
+                <ul className="agent-points">
+                  <li>Evaluates required programming language & frameworks</li>
+                  <li>Recommends optimal database and AI libraries</li>
+                  <li>Provides architectural justification for students</li>
+                </ul>
+                <button type="button" className="primary-button" disabled={technologyLoading} onClick={openTechnologyAgent}>
+                  {technologyLoading ? "Analyzing..." : technologyResult ? "View Tech Stack" : "Run Agent"}
+                  <span className="button-arrow">→</span>
+                </button>
+              </article>
 
-                <article className={`agent-big ${riskResult ? "done" : ""}`}>
-                  <span className="agent-step">MILESTONE 3</span>
-                  <div className="agent-big-head">
-                    <b className="agent-icon">⚠</b>
-                    <div>
-                      <h2>Risk Assessment & Mitigation Agent</h2>
-                      <em className={riskResult ? "status-complete" : riskLoading ? "status-running" : "status-pending"}>
-                        {riskResult ? `Risk: ${riskResult.overall_risk}` : riskLoading ? "Evaluating..." : "Ready"}
-                      </em>
-                    </div>
+              <article className={`agent-big ${riskResult ? "done" : ""}`}>
+                <span className="agent-step">MILESTONE 3</span>
+                <div className="agent-big-head">
+                  <b className="agent-icon">⚠</b>
+                  <div>
+                    <h2>Risk Assessment & Mitigation Agent</h2>
+                    <em className={riskResult ? "status-complete" : riskLoading ? "status-running" : "status-pending"}>
+                      {riskResult ? `Risk: ${riskResult.overall_risk}` : riskLoading ? "Evaluating..." : "Ready"}
+                    </em>
                   </div>
-                  <p>Identifies project bottlenecks across technical, timeline, data, and integration dimensions with mitigation strategies.</p>
-                  <ul className="agent-points">
-                    <li>Detects 8 realistic project risk categories</li>
-                    <li>Calculates probability, impact, and severity</li>
-                    <li>Gives actionable steps to avoid academic project delays</li>
-                  </ul>
-                  <button type="button" className="primary-button" disabled={riskLoading} onClick={() => { if (riskResult) setCurrentPage("risk"); else handleRunRiskAssessment(); }}>
-                    {riskLoading ? "Assessing..." : riskResult ? "View Risk Report" : "Run Risk Agent"}
-                    <span className="button-arrow">→</span>
-                  </button>
-                </article>
+                </div>
+                <p>Identifies project bottlenecks across technical, timeline, data, and integration dimensions with mitigation strategies.</p>
+                <ul className="agent-points">
+                  <li>Detects 8 realistic project risk categories</li>
+                  <li>Calculates probability, impact, and severity</li>
+                  <li>Gives actionable steps to avoid academic project delays</li>
+                </ul>
+                <button type="button" className="primary-button" disabled={riskLoading} onClick={() => { if (riskResult) setCurrentPage("risk"); else handleRunRiskAssessment(); }}>
+                  {riskLoading ? "Assessing..." : riskResult ? "View Risk Report" : "Run Risk Agent"}
+                  <span className="button-arrow">→</span>
+                </button>
+              </article>
 
-                <article className={`agent-big ${savedProgress.length ? "done" : ""}`}>
-                  <span className="agent-step">MILESTONE 3</span>
-                  <div className="agent-big-head">
-                    <b className="agent-icon">◔</b>
-                    <div>
-                      <h2>Progress Tracking & Plan Adjustment</h2>
-                      <em className={savedProgress.length ? "status-complete" : "status-pending"}>{savedProgress.length ? "Active" : "Ready"}</em>
-                    </div>
+              <article className={`agent-big ${savedProgress.length ? "done" : ""}`}>
+                <span className="agent-step">MILESTONE 3</span>
+                <div className="agent-big-head">
+                  <b className="agent-icon">◔</b>
+                  <div>
+                    <h2>Progress Tracking & Plan Adjustment</h2>
+                    <em className={savedProgress.length ? "status-complete" : "status-pending"}>{savedProgress.length ? "Active" : "Ready"}</em>
                   </div>
-                  <p>Calculates weekly progress, highlights blockers, and dynamically reschedules milestones when tasks are delayed.</p>
-                  <ul className="agent-points">
-                    <li>Automated completion percentage math</li>
-                    <li>Detects delayed dependencies between tasks</li>
-                    <li>Dynamically recalibrates your remaining sprint plan</li>
-                  </ul>
-                  <button type="button" className="primary-button" onClick={openProgressAgent}>
-                    Open Progress Tracker
-                    <span className="button-arrow">→</span>
-                  </button>
-                </article>
+                </div>
+                <p>Calculates weekly progress, highlights blockers, and dynamically reschedules milestones when tasks are delayed.</p>
+                <ul className="agent-points">
+                  <li>Automated completion percentage math</li>
+                  <li>Detects delayed dependencies between tasks</li>
+                  <li>Dynamically recalibrates your remaining sprint plan</li>
+                </ul>
+                <button type="button" className="primary-button" onClick={openProgressAgent}>
+                  Open Progress Tracker
+                  <span className="button-arrow">→</span>
+                </button>
+              </article>
 
-                <article className="agent-big done">
-                  <span className="agent-step">MILESTONE 3</span>
-                  <div className="agent-big-head">
-                    <b className="agent-icon">✧</b>
-                    <div>
-                      <h2>Conversational AI Mentor</h2>
-                      <em className="status-complete">Online</em>
-                    </div>
+              <article className="agent-big done">
+                <span className="agent-step">MILESTONE 3</span>
+                <div className="agent-big-head">
+                  <b className="agent-icon">✧</b>
+                  <div>
+                    <h2>Conversational AI Mentor</h2>
+                    <em className="status-complete">Online</em>
                   </div>
-                  <p>Your interactive academic guide for weekly check-ins, answering technical questions, and preparing for viva evaluations.</p>
-                  <ul className="agent-points">
-                    <li>Continuous guidance tailored to your project</li>
-                    <li>Actionable advice for resolving tricky bugs</li>
-                    <li>Pre-built prompts for academic defense prep</li>
-                  </ul>
-                  <button type="button" className="primary-button" onClick={() => setCurrentPage("mentor")}>
-                    Chat with Mentor
-                    <span className="button-arrow">→</span>
-                  </button>
-                </article>
+                </div>
+                <p>Your interactive academic guide for weekly check-ins, answering technical questions, and preparing for viva evaluations.</p>
+                <ul className="agent-points">
+                  <li>Continuous guidance tailored to your project</li>
+                  <li>Actionable advice for resolving tricky bugs</li>
+                  <li>Pre-built prompts for academic defense prep</li>
+                </ul>
+                <button type="button" className="primary-button" onClick={() => setCurrentPage("mentor")}>
+                  Chat with Mentor
+                  <span className="button-arrow">→</span>
+                </button>
+              </article>
 
-                <article className="agent-big done">
-                  <span className="agent-step">MILESTONE 3</span>
-                  <div className="agent-big-head">
-                    <b className="agent-icon">📄</b>
-                    <div>
-                      <h2>Documentation Generation Hub</h2>
-                      <em className="status-complete">Available</em>
-                    </div>
+              <article className="agent-big done">
+                <span className="agent-step">MILESTONE 3</span>
+                <div className="agent-big-head">
+                  <b className="agent-icon">📄</b>
+                  <div>
+                    <h2>Documentation Generation Hub</h2>
+                    <em className="status-complete">Available</em>
                   </div>
-                  <p>Auto-generates publication-ready academic project documentation formatted for university requirements.</p>
-                  <ul className="agent-points">
-                    <li>Project Synopsis (Executive summary & scope)</li>
-                    <li>System Methodology & Architecture details</li>
-                    <li>Weekly Progress Reports with supervisor sign-off</li>
-                  </ul>
-                  <button type="button" className="primary-button" onClick={() => setCurrentPage("documentation")}>
-                    Open Documentation Hub
-                    <span className="button-arrow">→</span>
-                  </button>
-                </article>
-              </div>
-            </section>
-          )}
+                </div>
+                <p>Auto-generates publication-ready academic project documentation formatted for university requirements.</p>
+                <ul className="agent-points">
+                  <li>Project Synopsis (Executive summary & scope)</li>
+                  <li>System Methodology & Architecture details</li>
+                  <li>Weekly Progress Reports with supervisor sign-off</li>
+                </ul>
+                <button type="button" className="primary-button" onClick={() => setCurrentPage("documentation")}>
+                  Open Documentation Hub
+                  <span className="button-arrow">→</span>
+                </button>
+              </article>
+            </div>
+          </section>
+        )}
 
-          {/* --------------------------------------------------
+        {/* --------------------------------------------------
             MILESTONE 3: RISK ASSESSMENT & MITIGATION AGENT PAGE
         -------------------------------------------------- */}
-          {currentPage === "risk" && (
-            <section className="glass-card risk-page">
-              <div className="card-heading">
-                <div className="section-icon" style={{ background: "#4a2a22", color: "#ff8264" }}>⚠</div>
-                <div>
-                  <div className="section-number">MILESTONE 03</div>
-                  <h2>Project Risk Assessment & Mitigation Agent</h2>
-                  <p>Evaluates execution blockers, technical dependencies, and recommends practical solutions.</p>
-                </div>
-                <div style={{ marginLeft: "auto" }}>
-                  <button
-                    type="button"
-                    className="primary-button"
-                    disabled={riskLoading}
-                    onClick={handleRunRiskAssessment}
-                  >
-                    {riskLoading ? "Evaluating Project Risks..." : riskResult ? "Re-evaluate Risks" : "Run Risk Assessment"}
-                    <span className="button-arrow">⚡</span>
-                  </button>
-                </div>
+        {currentPage === "risk" && (
+          <section className="glass-card risk-page">
+            <div className="card-heading">
+              <div className="section-icon" style={{ background: "#4a2a22", color: "#ff8264" }}>⚠</div>
+              <div>
+                <div className="section-number">MILESTONE 03</div>
+                <h2>Project Risk Assessment & Mitigation Agent</h2>
+                <p>Evaluates execution blockers, technical dependencies, and recommends practical solutions.</p>
               </div>
-
-              {riskError && (
-                <div className="progress-error" style={{ marginBottom: "16px" }}>
-                  ⚠️ {riskError}
-                </div>
-              )}
-
-              {!riskResult && !riskLoading && (
-                <div className="empty-chart-state" style={{ textAlign: "center", padding: "40px 20px" }}>
-                  <strong>No Risk Assessment Generated Yet</strong>
-                  <p>Click "Run Risk Assessment" to have the agent analyze your project feasibility, scope, and tech stack.</p>
-                  <button
-                    type="button"
-                    className="primary-button"
-                    style={{ marginTop: "16px" }}
-                    onClick={handleRunRiskAssessment}
-                  >
-                    Start Risk Assessment Now →
-                  </button>
-                </div>
-              )}
-
-              {riskLoading && (
-                <div className="progress-result-box" style={{ textAlign: "center", padding: "30px" }}>
-                  <h3>🔍 AI Risk Analyst is evaluating your project...</h3>
-                  <p>Analyzing technical feasibility, dataset availability, sprint timelines, and external API rate limits.</p>
-                </div>
-              )}
-
-              {riskResult && (
-                <div className="risk-results-wrap">
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", marginBottom: "24px" }}>
-                    <div className="progress-stat-box" style={{ borderLeft: riskResult.overall_risk === "HIGH" ? "4px solid #f87171" : riskResult.overall_risk === "MEDIUM" ? "4px solid #fbbf24" : "4px solid #34d399" }}>
-                      <span>OVERALL RISK LEVEL</span>
-                      <strong style={{ color: riskResult.overall_risk === "HIGH" ? "#f87171" : riskResult.overall_risk === "MEDIUM" ? "#fbbf24" : "#34d399" }}>
-                        {riskResult.overall_risk} RISK
-                      </strong>
-                      <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
-                        Risk Index: {riskResult.overall_risk_score || 60}/100
-                      </small>
-                    </div>
-
-                    <div className="progress-stat-box">
-                      <span>EVALUATED PROJECT</span>
-                      <strong>{projectData.title || "Academic Project"}</strong>
-                      <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
-                        {riskResult.risks?.length || 0} identified risk areas
-                      </small>
-                    </div>
-
-                    <div className="progress-stat-box">
-                      <span>AGENT STATUS</span>
-                      <strong style={{ color: "#34d399" }}>Analysis Complete</strong>
-                      <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
-                        Mitigations Ready
-                      </small>
-                    </div>
-                  </div>
-
-                  {riskResult.summary && (
-                    <div className="progress-result-box" style={{ marginBottom: "24px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", padding: "18px", borderRadius: "10px" }}>
-                      <h3 style={{ margin: "0 0 8px 0", color: "#eaf0ff" }}>📌 Executive Summary</h3>
-                      <p style={{ margin: 0, color: "#cbd5ed", lineHeight: "1.6" }}>{riskResult.summary}</p>
-                    </div>
-                  )}
-
-                  {riskResult.top_priority_actions?.length > 0 && (
-                    <div style={{ marginBottom: "24px", background: "rgba(35, 127, 128, 0.1)", border: "1px solid rgba(35, 127, 128, 0.3)", borderRadius: "10px", padding: "18px" }}>
-                      <h3 style={{ margin: "0 0 10px 0", color: "#6be5c7" }}>🎯 Top Priority Actions to De-Risk Project</h3>
-                      <ul style={{ margin: 0, paddingLeft: "20px", color: "#d1fae5" }}>
-                        {riskResult.top_priority_actions.map((action, idx) => (
-                          <li key={idx} style={{ marginBottom: "8px", lineHeight: "1.5" }}>{action}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  <h3 style={{ color: "#eaf0ff", margin: "20px 0 14px 0" }}>Detailed Risk Matrix & Mitigations</h3>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
-                    {riskResult.risks?.map((r, i) => (
-                      <div
-                        key={r.id || i}
-                        style={{
-                          background: "rgba(20, 27, 44, 0.9)",
-                          border: "1px solid rgba(255, 255, 255, 0.08)",
-                          borderRadius: "12px",
-                          padding: "18px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px"
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
-                          <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", color: "#77e8d4", background: "rgba(119, 232, 212, 0.12)", padding: "3px 8px", borderRadius: "4px" }}>
-                            {r.category}
-                          </span>
-                          <span
-                            style={{
-                              fontSize: "11px",
-                              fontWeight: "800",
-                              padding: "3px 8px",
-                              borderRadius: "4px",
-                              background: r.severity === "HIGH" ? "rgba(248, 113, 113, 0.2)" : r.severity === "MEDIUM" ? "rgba(251, 191, 36, 0.2)" : "rgba(52, 211, 153, 0.2)",
-                              color: r.severity === "HIGH" ? "#f87171" : r.severity === "MEDIUM" ? "#fbbf24" : "#34d399",
-                            }}
-                          >
-                            {r.severity} SEVERITY
-                          </span>
-                        </div>
-
-                        <h4 style={{ margin: "4px 0", color: "#f3f4f6", fontSize: "15px" }}>{r.risk}</h4>
-
-                        <div style={{ fontSize: "12px", color: "#9ca9c3", display: "flex", gap: "14px" }}>
-                          <span>Probability: <strong style={{ color: "#e5e7eb" }}>{r.probability}</strong></span>
-                          <span>Impact: <strong style={{ color: "#e5e7eb" }}>{r.impact}</strong></span>
-                        </div>
-
-                        <div style={{ background: "rgba(0,0,0,0.2)", padding: "10px", borderRadius: "6px", fontSize: "12px", color: "#cbd5e1" }}>
-                          <div style={{ marginBottom: "6px" }}><strong>Reason:</strong> {r.reason}</div>
-                          <div><strong>Possible Effect:</strong> {r.possible_effect}</div>
-                        </div>
-
-                        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px" }}>
-                          <div style={{ fontSize: "12px", color: "#a7f3d0", marginBottom: "6px" }}>
-                            <strong>💡 Mitigation Strategy:</strong>
-                            <p style={{ margin: "4px 0 0 0", color: "#e2e8f0" }}>{r.mitigation}</p>
-                          </div>
-                          {r.recommended_action && (
-                            <div style={{ fontSize: "12px", color: "#93c5fd" }}>
-                              <strong>👉 Recommended Action:</strong> {r.recommended_action}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {riskResult.final_recommendation && (
-                    <div style={{ marginTop: "24px", padding: "16px", borderRadius: "8px", background: "rgba(138, 99, 255, 0.1)", border: "1px solid rgba(138, 99, 255, 0.3)", color: "#e0e7ff", fontSize: "13px" }}>
-                      <strong>Mentor Recommendation:</strong> {riskResult.final_recommendation}
-                    </div>
-                  )}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            MILESTONE 3: ON-DEMAND DOCUMENTATION GENERATION HUB
-        -------------------------------------------------- */}
-          {currentPage === "documentation" && (
-            <section className="glass-card documentation-page">
-              <div className="card-heading">
-                <div className="section-icon" style={{ background: "#253149", color: "#77a6f7" }}>📄</div>
-                <div>
-                  <div className="section-number">MILESTONE 03</div>
-                  <h2>On-Demand Documentation Generation Hub</h2>
-                  <p>Generate academic-standard Project Synopsis, Methodology, and Progress Reports.</p>
-                </div>
-              </div>
-
-              <div style={{ display: "flex", gap: "10px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "14px", marginBottom: "20px", flexWrap: "wrap" }}>
+              <div style={{ marginLeft: "auto" }}>
                 <button
                   type="button"
-                  className={`segmented-button ${docTab === "synopsis" ? "active" : ""}`}
-                  style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "synopsis" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "synopsis" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "synopsis" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
-                  onClick={() => setDocTab("synopsis")}
+                  className="primary-button"
+                  disabled={riskLoading}
+                  onClick={handleRunRiskAssessment}
                 >
-                  📄 Project Synopsis
+                  {riskLoading ? "Evaluating Project Risks..." : riskResult ? "Re-evaluate Risks" : "Run Risk Assessment"}
+                  <span className="button-arrow">⚡</span>
                 </button>
-                <button
-                  type="button"
-                  className={`segmented-button ${docTab === "methodology" ? "active" : ""}`}
-                  style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "methodology" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "methodology" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "methodology" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
-                  onClick={() => setDocTab("methodology")}
-                >
-                  🛠️ System Methodology
-                </button>
-                <button
-                  type="button"
-                  className={`segmented-button ${docTab === "progress" ? "active" : ""}`}
-                  style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "progress" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "progress" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "progress" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
-                  onClick={() => setDocTab("progress")}
-                >
-                  📊 Progress Report
-                </button>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
-                <div>
-                  <strong style={{ color: "#f3f4f6", fontSize: "16px" }}>
-                    {docTab === "synopsis" ? "Academic Project Synopsis" : docTab === "methodology" ? "System Methodology & Architecture" : "Weekly Progress Report"}
-                  </strong>
-                  <p style={{ margin: "4px 0 0 0", color: "#9ca9c3", fontSize: "12px" }}>
-                    {docTab === "synopsis" ? "Complete project problem statement, objectives, tech stack, and expected outcomes." : docTab === "methodology" ? "Modular breakdown, architecture layers, API pipeline, and validation model." : "Weekly milestones, completed tasks, identified risks, and mentor sign-off sheet."}
-                  </p>
-                </div>
-
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <button
-                    type="button"
-                    className="primary-button"
-                    disabled={docLoading}
-                    onClick={() => handleGenerateDoc(docTab)}
-                  >
-                    {docLoading ? "Generating with AI..." : docResult[docTab] ? "Regenerate Document" : "Generate Document"} ⚡
-                  </button>
-                  {docResult[docTab] && (
-                    <>
-                      <button
-                        type="button"
-                        style={{ padding: "10px 14px", borderRadius: "6px", background: "rgba(255,255,255,0.08)", color: "#e2e8f0", border: "1px solid rgba(255,255,255,0.2)" }}
-                        onClick={() => handleCopyDoc(docResult[docTab])}
-                      >
-                        {copySuccess ? "✓ Copied!" : "📋 Copy"}
-                      </button>
-                      <button
-                        type="button"
-                        style={{ padding: "10px 14px", borderRadius: "6px", background: "rgba(255,255,255,0.08)", color: "#e2e8f0", border: "1px solid rgba(255,255,255,0.2)" }}
-                        onClick={() => handleDownloadDoc(`${projectData.title || "project"}_${docTab}.md`, docResult[docTab])}
-                      >
-                        ⬇ Download .md
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {docError && (
-                <div className="progress-error" style={{ marginBottom: "16px" }}>
-                  ⚠️ {docError}
-                </div>
-              )}
-
-              {!docResult[docTab] && !docLoading && (
-                <div className="empty-chart-state" style={{ textAlign: "center", padding: "50px 20px" }}>
-                  <strong>No Document Generated Yet for this Section</strong>
-                  <p>Click "Generate Document" above to generate this report using your project data.</p>
-                </div>
-              )}
-
-              {docLoading && (
-                <div className="progress-result-box" style={{ textAlign: "center", padding: "40px" }}>
-                  <h3>⏳ Formatting Academic Document...</h3>
-                  <p>Generating structured headings, formal academic sections, and system specifications.</p>
-                </div>
-              )}
-
-              {docResult[docTab] && (
-                <div
-                  style={{
-                    background: "#0c1322",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: "10px",
-                    padding: "24px",
-                    color: "#d1d5db",
-                    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-                    fontSize: "13px",
-                    lineHeight: "1.7",
-                    whiteSpace: "pre-wrap",
-                    overflowX: "auto",
-                    maxHeight: "650px",
-                    overflowY: "auto"
-                  }}
-                >
-                  {docResult[docTab]}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            SETTINGS PAGE
-        -------------------------------------------------- */}
-          {currentPage === "settings" && (
-            <section className="settings-page settings-workspace">
-              <div className="settings-hero">
-                <div className="settings-hero-copy">
-                  <span className="settings-eyebrow"><i /> YOUR WORKSPACE, YOUR RULES</span>
-                  <h2>Make it feel like <em>yours.</em></h2>
-                  <p>Personalize your profile, fine-tune your workspace, and choose how your AI Mentor supports you.</p>
-                </div>
-                <div className="settings-hero-orb" aria-hidden="true"><span>✳</span><i /><b /></div>
-                <div className="settings-hero-foot"><span><i /> Preferences save automatically</span><span>WORKSPACE SETTINGS <b>•</b> PERSONAL</span></div>
-              </div>
-              <div className="settings-section-label"><span>01 / PERSONALIZATION</span><p>Your identity and how the app looks</p></div>
-              <article className="settings-card settings-profile-card">
-                <h2><span className="settings-heading-icon teal">◎</span><span>Profile<small>Your personal details</small></span></h2>
-                <div className="settings-grid">
-                  <div className="input-group">
-                    <label htmlFor="set-name">Full Name</label>
-                    <input id="set-name" name="name" value={formData.name} onChange={handleProfileChange} placeholder="Your name" />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="set-dept">Department</label>
-                    <input id="set-dept" name="department" value={formData.department} onChange={handleProfileChange} placeholder="e.g. CSE" />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="set-email">Email</label>
-                    <input id="set-email" value={auth.email} readOnly />
-                  </div>
-                </div>
-              </article>
-
-              <article className="settings-card settings-appearance-card">
-                <h2><span className="settings-heading-icon violet">◐</span><span>Appearance<small>Shape your visual workspace</small></span></h2>
-                <div className="settings-row">
-                  <div><strong>Theme</strong><span>Choose dark or light interface</span></div>
-                  <div className="segmented">
-                    {["dark", "light"].map((t) => (
-                      <button key={t} type="button" className={settings.theme === t ? "on" : ""} onClick={() => updateSetting("theme", t)}>{t === "dark" ? "🌙 Dark" : "☀️ Light"}</button>
-                    ))}
-                  </div>
-                </div>
-                <div className="settings-row">
-                  <div><strong>Font size</strong><span>Make text bigger or smaller</span></div>
-                  <div className="segmented">
-                    {[["medium", "Medium"], ["large", "Large"], ["xl", "Extra Large"]].map(([v, label]) => (
-                      <button key={v} type="button" className={settings.fontSize === v ? "on" : ""} onClick={() => updateSetting("fontSize", v)}>{label}</button>
-                    ))}
-                  </div>
-                </div>
-              </article>
-
-              <div className="settings-section-label"><span>02 / PREFERENCES</span><p>Keep your workflow comfortable and focused</p></div>
-              <article className="settings-card settings-notification-card">
-                <h2><span className="settings-heading-icon amber">⌁</span><span>Notifications<small>Choose what deserves your attention</small></span></h2>
-                <label className="settings-row toggle-row">
-                  <div><strong>Agent updates</strong><span>Notify me when an agent completes</span></div>
-                  <input type="checkbox" checked={settings.notifications} onChange={(e) => updateSetting("notifications", e.target.checked)} />
-                </label>
-                <label className="settings-row toggle-row">
-                  <div><strong>Weekly progress reminder</strong><span>Remind me to submit weekly progress</span></div>
-                  <input type="checkbox" checked={settings.weeklyReminder} onChange={(e) => updateSetting("weeklyReminder", e.target.checked)} />
-                </label>
-              </article>
-
-              <article className="settings-card settings-mentor-card">
-                <h2><span className="settings-heading-icon purple">✳</span><span>AI Mentor<small>Set the tone of your guidance</small></span></h2>
-                <div className="settings-row">
-                  <div><strong>Guidance style</strong><span>How detailed the mentor should be</span></div>
-                  <div className="segmented">
-                    {[["brief", "Brief"], ["detailed", "Detailed"]].map(([v, label]) => (
-                      <button key={v} type="button" className={settings.mentorStyle === v ? "on" : ""} onClick={() => updateSetting("mentorStyle", v)}>{label}</button>
-                    ))}
-                  </div>
-                </div>
-                <button type="button" className="primary-button" onClick={() => setAiOpen(true)}>Open AI Mentor <span className="button-arrow">→</span></button>
-              </article>
-
-              <div className="settings-section-label"><span>03 / ACCOUNT</span><p>Manage access to your account</p></div>
-              <article className="settings-card settings-account-card">
-                <h2><span className="settings-heading-icon slate">⌑</span><span>Account<small>Your sign-in and session</small></span></h2>
-                <div className="settings-row">
-                  <div><strong>{auth.name}</strong><span>{auth.email}</span></div>
-                  <button type="button" className="logout-button" onClick={handleLogout}>Logout</button>
-                </div>
-              </article>
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            AI PROJECT MENTOR — dedicated workspace
-        -------------------------------------------------- */}
-          {currentPage === "mentor" && (
-            <section className="mentor-page">
-              <div className="mentor-hero" style={{ marginBottom: "20px" }}>
-                <div className="mentor-hero-copy">
-                  <span className="mentor-kicker">CONVERSATIONAL ACADEMIC MENTOR</span>
-                  <h2>One-on-One Project Guidance<br /><em>Whenever you need it.</em></h2>
-                  <p>Discuss your architecture, troubleshoot tricky bugs, plan your upcoming sprints, and get viva evaluation prep.</p>
-                  <div className="mentor-hero-actions">
-                    <button className="mentor-primary" onClick={() => setCurrentPage(projectData.title ? "progress" : "project")}>
-                      {projectData.title ? "Track Sprint Progress" : "Setup Project Workspace"} <span>→</span>
-                    </button>
-                    <button className="mentor-secondary" onClick={() => setCurrentPage("risk")}>View Risk Matrix</button>
-                  </div>
-                </div>
-                <div className="mentor-orb-scene" aria-hidden="true">
-                  <div className="mentor-orbit orbit-one"></div>
-                  <div className="mentor-orbit orbit-two"></div>
-                  <div className="mentor-orb"><span>✦</span></div>
-                  <div className="mentor-orb-caption">AI MENTOR <small>ONLINE · CONTEXT-AWARE</small></div>
-                </div>
-              </div>
-
-              {/* Live Conversational Chatroom */}
-              <div className="glass-card" style={{ padding: "20px", marginBottom: "24px" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "14px", marginBottom: "16px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "#168f8b", display: "grid", placeItems: "center", fontSize: "18px" }}>🤖</div>
-                    <div>
-                      <h3 style={{ margin: 0, color: "#f3f4f6", fontSize: "16px" }}>Academic Mentor Consultation</h3>
-                      <small style={{ color: "#77e8d4" }}>
-                        ● Active • Project Context: {projectData.title || "Standard Workspace"} ({progressData.week || "Week 1"})
-                      </small>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#9ca9c3", padding: "6px 12px", borderRadius: "6px", fontSize: "11px" }}
-                    onClick={() => {
-                      setMentorChatHistory([
-                        {
-                          sender: "mentor",
-                          text: "👋 Hi! Session refreshed. What aspect of your academic project would you like to discuss?",
-                          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                        }
-                      ]);
-                    }}
-                  >
-                    Clear Chat
-                  </button>
-                </div>
-
-                {/* Chat Thread */}
-                <div
-                  style={{
-                    height: "380px",
-                    overflowY: "auto",
-                    padding: "12px",
-                    background: "#0d1424",
-                    borderRadius: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "14px",
-                    marginBottom: "16px",
-                    border: "1px solid rgba(255,255,255,0.06)"
-                  }}
-                >
-                  {mentorChatHistory.map((msg, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: msg.sender === "student" ? "flex-end" : "flex-start",
-                        maxWidth: "85%",
-                        alignSelf: msg.sender === "student" ? "flex-end" : "flex-start"
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px", fontSize: "10px", color: "#8a96aa" }}>
-                        <span>{msg.sender === "student" ? (formData.name || "Student") : "AI Project Mentor"}</span>
-                        <span>•</span>
-                        <span>{msg.timestamp || ""}</span>
-                      </div>
-                      <div
-                        style={{
-                          padding: "12px 16px",
-                          borderRadius: msg.sender === "student" ? "14px 14px 2px 14px" : "14px 14px 14px 2px",
-                          background: msg.sender === "student" ? "linear-gradient(135deg, #2b6cb0, #4c51bf)" : "rgba(255,255,255,0.06)",
-                          color: "#f3f4f6",
-                          fontSize: "13px",
-                          lineHeight: "1.6",
-                          whiteSpace: "pre-wrap",
-                          border: msg.sender === "student" ? "none" : "1px solid rgba(255,255,255,0.1)",
-                          boxShadow: "0 2px 6px rgba(0,0,0,0.15)"
-                        }}
-                      >
-                        {msg.text}
-                      </div>
-                    </div>
-                  ))}
-                  {mentorLoading && (
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#77e8d4", fontSize: "12px", padding: "8px" }}>
-                      <span>🤖 AI Mentor is formulating advice...</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Quick Prompt Suggestions */}
-                <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "10px", marginBottom: "12px", scrollbarWidth: "none" }}>
-                  <span style={{ fontSize: "11px", color: "#9ca9c3", alignSelf: "center", whiteSpace: "nowrap" }}>Quick Prompts:</span>
-                  {[
-                    "How should I structure my weekly tasks?",
-                    "Help me debug backend API errors",
-                    "What questions will supervisor ask in viva?",
-                    "How to connect MongoDB to Flask?"
-                  ].map((promptText, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      style={{
-                        whiteSpace: "nowrap",
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(255,255,255,0.12)",
-                        color: "#cbd5e1",
-                        borderRadius: "20px",
-                        padding: "6px 12px",
-                        fontSize: "11px",
-                        cursor: "pointer",
-                        transition: "all 0.15s"
-                      }}
-                      onClick={() => handleSendMentorMessage(promptText)}
-                    >
-                      💡 {promptText}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Input Form */}
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSendMentorMessage();
-                  }}
-                  style={{ display: "flex", gap: "10px" }}
-                >
-                  <input
-                    type="text"
-                    placeholder="Ask a question about your project, report, or implementation..."
-                    value={mentorInput}
-                    onChange={(e) => setMentorInput(e.target.value)}
-                    disabled={mentorLoading}
-                    style={{
-                      flex: 1,
-                      padding: "12px 16px",
-                      borderRadius: "8px",
-                      background: "#0b1120",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      color: "#f3f4f6",
-                      fontSize: "13px",
-                      outline: "none"
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="primary-button"
-                    disabled={mentorLoading || !mentorInput.trim()}
-                    style={{ padding: "0 22px" }}
-                  >
-                    Send ↗
-                  </button>
-                </form>
-              </div>
-
-              {/* Mentor Action Quick Links */}
-              <div className="mentor-section-heading">
-                <div><span>STRATEGIC PHASES</span><h2>Guiding your lifecycle</h2></div>
-                <p>Key checkpoints for academic success</p>
-              </div>
-              <div className="mentor-action-grid">
-                <article className="mentor-action-card mentor-idea">
-                  <div className="mentor-action-icon">✦</div>
-                  <span className="mentor-card-label">01 / IDEATE & SCOPE</span>
-                  <h3>Refine Problem Statement</h3>
-                  <p>Ensure your project scope is achievable within academic semester deadlines.</p>
-                  <button onClick={() => handleSendMentorMessage("How can I narrow down my project scope to ensure it is finished on time?")}>
-                    Ask Mentor <span>↗</span>
-                  </button>
-                </article>
-                <article className="mentor-action-card mentor-plan">
-                  <div className="mentor-action-icon">⌘</div>
-                  <span className="mentor-card-label">02 / ARCHITECTURE</span>
-                  <h3>Technology Alignment</h3>
-                  <p>Verify that your frontend, backend, and database integrate with minimal friction.</p>
-                  <button onClick={() => setCurrentPage("technology")}>
-                    Review Tech Stack <span>↗</span>
-                  </button>
-                </article>
-                <article className="mentor-action-card mentor-tech">
-                  <div className="mentor-action-icon">⚡</div>
-                  <span className="mentor-card-label">03 / RISK MITIGATION</span>
-                  <h3>Blocker Management</h3>
-                  <p>Proactively resolve API limits, data shortages, and integration issues.</p>
-                  <button onClick={() => setCurrentPage("risk")}>
-                    Inspect Risks <span>↗</span>
-                  </button>
-                </article>
-                <article className="mentor-action-card mentor-progress">
-                  <div className="mentor-action-icon">◷</div>
-                  <span className="mentor-card-label">04 / DEFENSE & REPORTS</span>
-                  <h3>Project Documentation</h3>
-                  <p>Generate IEEE-formatted project synopsis and methodology documentation.</p>
-                  <button onClick={() => setCurrentPage("documentation")}>
-                    Open Doc Hub <span>↗</span>
-                  </button>
-                </article>
-              </div>
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            DASHBOARD
-        -------------------------------------------------- */}
-          {currentPage === "faculty" && (() => {
-            const plan = timelineData || DEFAULT_TIMELINE;
-            const weeks = Array.isArray(plan.weekly_plan) ? plan.weekly_plan : [];
-            const tasks = weeks.flatMap((week, wi) => (week.tasks || []).map((task, ti) => ({ id: `w${week.week ?? wi + 1}-t${ti}`, week: week.week ?? wi + 1, milestone: week.milestone || `Week ${week.week ?? wi + 1}`, task })));
-            const checkedDone = tasks.filter(task => milestone4Completed[task.id]).length;
-            const checkedPercent = tasks.length ? Math.round(checkedDone / tasks.length * 100) : 0;
-            // Live student's progress = best of checklist and Progress Tracker; 100% means every task is Completed
-            const myPercent = Math.max(checkedPercent, trackerPercent);
-            const myAllDone = myPercent >= 100 && tasks.length > 0;
-            const myDone = myAllDone ? tasks.length : Math.max(checkedDone, Math.round(myPercent / 100 * tasks.length));
-            const myDoneIds = new Set(tasks.filter(t => milestone4Completed[t.id]).map(t => t.id));
-            if (!myAllDone) { tasks.forEach(t => { if (myDoneIds.size < myDone && !myDoneIds.has(t.id)) myDoneIds.add(t.id); }); }
-            // Cohort roster: first row is the live student (real data from this app); the rest is sample roster data for the faculty view.
-            const roster = [
-              { name: formData.name || auth?.name || "Student", project: projectData.title || plan.project_title || "AI Project Mentor", percent: myPercent, updated: "Today", blocker: "", live: true },
-              { name: "Ananya Reddy", project: "Smart Attendance System", percent: 78, updated: "Yesterday", blocker: "", nextTask: "Complete the face-recognition module testing" },
-              { name: "Karthik Varma", project: "Crop Disease Detector", percent: 52, updated: "2 days ago", blocker: "Dataset labelling is taking longer than planned.", nextTask: "Finish labelling and start model training" },
-              { name: "Sneha Patel", project: "Campus Chatbot", percent: 91, updated: "Today", blocker: "", nextTask: "Prepare final demo and documentation" },
-              { name: "Rohit Sharma", project: "Expense Tracker App", percent: 24, updated: "5 days ago", blocker: "API integration pending, no update this week.", nextTask: "Integrate the expense API with the frontend" },
-              { name: "Meghana Rao", project: "Library Management Portal", percent: 100, updated: "3 days ago", blocker: "" }
-            ].map((st, idx) => {
-              const doneCount = st.live ? myDone : Math.round(st.percent / 100 * tasks.length);
-              const doneIds = st.live ? null : new Set(tasks.slice(0, doneCount).map(t => t.id));
-              const isDone = (t) => st.live ? (myAllDone || myDoneIds.has(t.id)) : doneIds.has(t.id);
-              const next = tasks.find(t => !isDone(t));
-              const health = st.percent >= 100 ? "Completed" : st.percent >= 60 ? "On Track" : st.percent >= 30 ? "Needs Attention" : "Behind";
-              const cls = health === "Completed" ? "done" : health === "On Track" ? "ok" : health === "Needs Attention" ? "warn" : "bad";
-              const summary = `${st.name} has completed ${doneCount} of ${tasks.length} planned tasks (${st.percent}%) on “${st.project}”. Status: ${health}. ` + (st.live ? (next ? `Next focus: Week ${next.week} — ${next.task}. ` : "All planned tasks are complete. ") : (st.nextTask ? `Next focus: ${st.nextTask}. ` : "All planned tasks are complete. ")) + (st.blocker ? `Reported blocker: ${st.blocker}` : "No blockers reported.");
-              return { ...st, id: idx, doneCount, isDone, next, health, cls, summary };
-            });
-            const avg = Math.round(roster.reduce((a, r) => a + r.percent, 0) / roster.length);
-            const onTrack = roster.filter(r => r.health === "On Track" || r.health === "Completed").length;
-            const attention = roster.filter(r => r.health === "Needs Attention" || r.health === "Behind").length;
-            return <section className="m4-workspace">
-              <div className="m4-hero faculty-hero"><div><span className="m4-kicker">FACULTY MONITORING · MILESTONE 4</span><h2>Project health <em>at a glance.</em></h2><p>Monitor student progress, project health indicators and auto-generated mentor summaries in one place.</p></div><div className="m4-ring" style={{ "--progress": `${avg}%` }}><div><strong>{avg}%</strong><span>AVG PROGRESS</span></div></div></div>
-              <div className="m4-metrics"><article><span>Students monitored</span><strong>{roster.length}</strong><small>Active project teams</small></article><article><span>On track</span><strong>{onTrack}</strong><small>Healthy or completed projects</small></article><article><span>Needs attention</span><strong>{attention}</strong><small>Behind or at risk</small></article><article><span>Average progress</span><strong>{avg}%</strong><small>Across all students</small></article></div>
-              <div className="m4-section-head"><div><span>01 · PROJECT HEALTH</span><h3>Health indicators</h3></div><span className="m4-status">{roster.length} students</span></div>
-              <div className="m4-table-wrap"><table className="m4-table"><thead><tr><th>Student</th><th>Project</th><th>Progress</th><th>Tasks</th><th>Last update</th><th>Health</th></tr></thead><tbody>{roster.map(r => <tr key={r.id}><td>{r.name}</td><td>{r.project}</td><td><div className="fac-bar"><i style={{ width: `${r.percent}%` }} /></div><small>{r.percent}%</small></td><td>{r.doneCount}/{tasks.length}</td><td>{r.updated}</td><td><span className={`fac-pill ${r.cls}`}>{r.health}</span></td></tr>)}</tbody></table></div>
-              <div className="m4-section-head"><div><span>02 · AUTO-GENERATED INSIGHT</span><h3>Mentor summaries</h3></div></div>
-              <div className="fac-summaries">{roster.map(r => <article className={`fac-summary ${r.cls}`} key={r.id}><div className="fac-summary-head"><strong>{r.name}</strong><span className={`fac-pill ${r.cls}`}>{r.health}</span></div><p>{r.summary}</p><small>Generated automatically from saved progress data.</small></article>)}</div>
-              <div className="m4-section-head"><div><span>03 · ANALYTICS</span><h3>Progress graphs</h3></div><span className="m4-status">Live overview</span></div>
-              <div className="fac-charts">
-                <article className="fac-chart-card"><h4>Progress by student</h4>
-                  <div className="fac-hbars">{roster.map(r => <div className="fac-hbar-row" key={r.id}><span className="fac-hbar-name">{r.name}</span><div className="fac-hbar-track"><i className={r.cls} style={{ width: `${r.percent}%` }} /></div><b>{r.percent}%</b></div>)}</div>
-                </article>
-                <article className="fac-chart-card"><h4>Health distribution</h4>
-                  {(() => {
-                    const c = { done: 0, ok: 0, warn: 0, bad: 0 }; roster.forEach(r => { c[r.cls]++; }); const n = roster.length || 1; const a = c.done / n * 100, b = a + c.ok / n * 100, d = b + c.warn / n * 100;
-                    return <div className="fac-donut-wrap"><div className="fac-donut" style={{ background: `conic-gradient(#3b82f6 0 ${a}%, #16a34a ${a}% ${b}%, #f59e0b ${b}% ${d}%, #ef4444 ${d}% 100%)` }}><div><strong>{roster.length}</strong><span>students</span></div></div>
-                      <ul className="fac-legend"><li><i style={{ background: "#3b82f6" }} />Completed <b>{c.done}</b></li><li><i style={{ background: "#16a34a" }} />On Track <b>{c.ok}</b></li><li><i style={{ background: "#f59e0b" }} />Needs Attention <b>{c.warn}</b></li><li><i style={{ background: "#ef4444" }} />Behind <b>{c.bad}</b></li></ul></div>;
-                  })()}
-                </article>
-                <article className="fac-chart-card"><h4>Tasks completed vs remaining</h4>
-                  <div className="fac-stack-list">{roster.map(r => <div className="fac-stack-row" key={r.id}><span>{r.name}</span><div className="fac-stack"><i className="d" style={{ width: `${tasks.length ? r.doneCount / tasks.length * 100 : 0}%` }} /><i className="p" style={{ width: `${tasks.length ? (tasks.length - r.doneCount) / tasks.length * 100 : 0}%` }} /></div><b>{r.doneCount}/{tasks.length}</b></div>)}</div>
-                  <div className="fac-stack-key"><span><i className="d" />Completed</span><span><i className="p" />Remaining</span></div>
-                </article>
-                <article className="fac-chart-card"><h4>Weekly completion · {roster[0].name}</h4>
-                  <div className="fac-columns">{weeks.map((w, wi) => { const wn = w.week ?? wi + 1; const wt = tasks.filter(t => t.week === wn); const wd = wt.filter(t => roster[0].isDone(t)).length; const pc = wt.length ? Math.round(wd / wt.length * 100) : 0; return <div className="fac-col" key={wn}><b>{pc}%</b><div className="fac-col-track"><i style={{ height: `${pc}%` }} /></div><span>W{wn}</span></div>; })}</div>
-                </article>
-              </div>
-              <div className="m4-section-head"><div><span>04 · MILESTONE 4 · PROGRESS TRACKING</span><h3>Weekly task checklist · {roster[0].name}</h3></div><span className="m4-status">{roster[0].doneCount} of {tasks.length} complete</span></div>
-              {weeks.length ? weeks.map((week, wi) => {
-                const wn = week.week ?? wi + 1;
-                const weekTasks = tasks.filter(task => task.week === wn);
-                const weekDone = weekTasks.filter(task => roster[0].isDone(task)).length;
-                return <article className="m4-week" key={wn}><div className="m4-week-head"><div><span>WEEK {wn}</span><h3>{week.milestone || `Week ${wn}`}</h3></div><span>{weekDone}/{weekTasks.length} tasks</span></div>
-                  {weekTasks.map(task => { const d = roster[0].isDone(task); return <label className={`m4-task ${d ? "is-done" : ""}`} key={task.id}><input type="checkbox" checked={d} onChange={() => { if (!myAllDone) setMilestone4Completed(previous => { const next = { ...previous, [task.id]: !previous[task.id] }; try { localStorage.setItem("apm_milestone4_completed", JSON.stringify(next)); } catch { } return next; }); }} /><span className="m4-task-check">{d ? "✓" : ""}</span><span>{task.task}</span><small>{d ? "Completed" : "Pending"}</small></label>; })}
-                </article>;
-              }) : <div className="m4-empty">No timeline tasks found. Generate or load your project roadmap first.</div>}
-              <p className="m4-note">Note: task completion is saved in this browser. 100% in the Progress Tracker marks every task Completed.</p>
-              <div className="m4-section-head"><div><span>05 · TASK REPORT</span><h3>Task report · {roster[0].name}</h3></div></div>
-              {[roster[0]].map(r => <details className="fac-detail" key={r.id} open><summary><span>{r.name}</span><small>{r.doneCount}/{tasks.length} tasks · {r.percent}%</small></summary><div className="m4-table-wrap"><table className="m4-table"><thead><tr><th>Week</th><th>Milestone</th><th>Task</th><th>Status</th></tr></thead><tbody>{tasks.map(task => <tr key={task.id}><td>Week {task.week}</td><td>{task.milestone}</td><td>{task.task}</td><td><span className={r.isDone(task) ? "m4-pill done" : "m4-pill pending"}>{r.isDone(task) ? "Completed" : "Pending"}</span></td></tr>)}</tbody></table></div></details>)}
-            </section>;
-          })()}
-
-          {currentPage === "dashboard" && (
-            <section className="dashboard-page">
-              <div className="dashboard-spotlight">
-                <div className="spotlight-copy">
-                  <span className="spotlight-eyebrow"><i /> YOUR PROJECT COMMAND CENTER</span>
-                  <h2>{projectData.title ? `Make ${projectData.title} happen.` : "Your next big idea starts here."}</h2>
-                  <p>{projectData.title ? "Your workspace is ready. Keep the momentum going with a focused next step." : "Create your project, map the milestones, and turn a big idea into small wins."}</p>
-                  <div className="spotlight-actions">
-                    <button className="spotlight-primary" onClick={() => setCurrentPage(projectData.title ? (technologyResult ? "progress" : "technology") : "project")}>{projectData.title ? (technologyResult ? "Update progress" : "Continue project") : "Create a project"} <span>↗</span></button>
-                    <button className="spotlight-secondary" onClick={() => setCurrentPage("mentor")}>Meet your AI Mentor</button>
-                  </div>
-                  <div className="spotlight-meta"><span><i className="meta-dot teal-dot" /> Personal workspace</span><span><i className="meta-dot violet-dot" /> AI-powered guidance</span></div>
-                </div>
-                <div className="spotlight-progress-card">
-                  <div className="spotlight-card-head"><span>PROJECT COMPLETION</span><b>LIVE OVERVIEW</b></div>
-                  <div className="spotlight-ring-row">
-                    <div className="spotlight-ring" style={{ "--progress": `${savedProgress.length ? (savedProgress[savedProgress.length - 1].progress_percentage || 0) : 0}%` }}><div className="spotlight-ring-center"><strong>{savedProgress.length ? (savedProgress[savedProgress.length - 1].progress_percentage || 0) : 0}<small>%</small></strong><span>completed</span></div></div>
-                    <div className="spotlight-ring-details"><strong>{savedProgress.length ? "Momentum is building" : projectData.title ? "Ready for your first update" : "Your journey awaits"}</strong><p>{savedProgress.length ? `${completedTotal} tasks completed so far` : "Your progress graph will grow as you log weekly wins."}</p><div className="ring-legend"><span><i className="legend-teal" /> Completed</span><span><i className="legend-track" /> Remaining</span></div></div>
-                  </div>
-                  <div className="spotlight-card-foot"><span>Current project</span><strong>{projectData.title || "No project submitted yet"}</strong></div>
-                </div>
-              </div>
-              <div className="stats-grid">
-                <article className="stat-card"><div className="stat-icon">▱</div><div><span>Total Projects</span><strong>{projectData.title ? "1" : "0"}</strong><small className="positive">{projectData.title ? "Project submitted" : "No projects yet"}</small></div></article>
-                <article className="stat-card"><div className="stat-icon">✓</div><div><span>Completed Tasks</span><strong>{completedTotal} <small>/ {totalTasks}</small></strong><small>{savedProgress.length ? "Progress submitted" : "No tasks completed"}</small><div className="mini-progress"><i style={{ width: `${savedProgress.length ? (savedProgress[savedProgress.length - 1].progress_percentage || 0) : 0}%` }} /></div></div></article>
-                <article className="stat-card"><div className="stat-icon">▣</div><div><span>Active Agents</span><strong>{(technologyResult ? 1 : 0) + (savedProgress.length ? 1 : 0)} <small>/ 2</small></strong><small><b className="green-dot" /> {technologyResult ? 1 : 0} recommendation · {savedProgress.length ? 1 : 0} progress</small></div></article>
-                <article className="stat-card"><div className="stat-icon">↗</div><div><span>Project Progress</span><strong>{savedProgress.length ? `${savedProgress[savedProgress.length - 1].progress_percentage || 0}%` : "0%"}</strong><small>On track</small><div className="mini-progress"><i style={{ width: `${savedProgress.length ? savedProgress[savedProgress.length - 1].progress_percentage || 0 : 0}%` }} /></div></div></article>
-              </div>
-              <div className="dashboard-columns">
-                <article className="dash-panel progress-overview"><div className="panel-title"><h2>♧ &nbsp; Project Progress Overview</h2><select aria-label="Progress time range" defaultValue="Last 7 Days"><option>Last 7 Days</option><option>Last 30 Days</option><option>This Year</option></select></div>{!projectData.title && !savedProgress.length ? <div className="empty-chart-state"><span className="empty-state-orbit">↗</span><strong>Your progress story starts here</strong><p>Submit your first project and weekly updates to see your progress chart.</p><button className="empty-state-action" onClick={() => setCurrentPage("project")}>Create your first project <span>→</span></button></div> : <><div className="chart-area"><div className="y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><svg viewBox="0 0 520 180" role="img" aria-label="Project progress line chart" preserveAspectRatio="none"><defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2563eb" stopOpacity=".18" /><stop offset="100%" stopColor="#2563eb" stopOpacity="0" /></linearGradient></defs>{[12, 52, 92, 132, 172].map(y => <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#e8eef8" strokeWidth="1" />)}{[0, 74, 148, 222, 296, 370, 444, 520].map(x => <line key={x} x1={x} y1="8" x2={x} y2="172" stroke="#edf1f8" strokeWidth="1" />)}<path d="M0 145 L74 115 L148 102 L222 121 L296 95 L370 108 L444 72 L520 45 L520 172 L0 172Z" fill="url(#chartFill)" /><polyline points="0,145 74,115 148,102 222,121 296,95 370,108 444,72 520,45" fill="none" stroke="#2670ed" strokeWidth="2.5" />{[[0, 145], [74, 115], [148, 102], [222, 121], [296, 95], [370, 108], [444, 72], [520, 45]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r="3.5" fill="#2670ed" />)}</svg></div><div className="chart-dates"><span>Day 1</span><span>Day 2</span><span>Day 3</span><span>Day 4</span><span>Day 5</span><span>Day 6</span><span>Day 7</span></div></>}</article>
-                <article className="dash-panel agents-panel"><div className="panel-title"><h2>♧ &nbsp; AI Agents Status</h2><button onClick={() => setCurrentPage("agents")}>View All →</button></div><div className="agent-grid two-agent-grid"><div className="agent-card"><b className="agent-icon">◇</b><strong>Technology Recommendation Agent</strong><em className={technologyResult ? "status-complete" : "status-pending"}>{techStatus}</em><p>{technologyResult ? "Technology suggestions are ready to review." : "Fill in project details and submit to generate recommendations."}</p><button className="agent-action" onClick={() => setCurrentPage("technology")}>Open Agent →</button></div><span className="agent-arrow">→</span><div className="agent-card"><b className="agent-icon">↗</b><strong>Progress Tracking Agent</strong><em className={savedProgress.length ? "status-complete" : "status-pending"}>{progressLocked ? "Locked" : savedProgress.length ? "Updated" : "Not started"}</em><p>{progressLocked ? "Complete the Technology Recommendation Agent to unlock this agent." : savedProgress.length ? "Your submitted progress is available." : "Submit weekly progress details to calculate project progress."}</p><button className="agent-action" disabled={progressLocked} onClick={openProgressAgent}>{progressLocked ? "🔒 Locked" : "Open Agent →"}</button></div></div></article>
-                <article className="dash-panel milestones-panel"><div className="panel-title"><h2>◷ &nbsp; Project Milestones</h2><button onClick={() => setCurrentPage("review")}>View Roadmap →</button></div>{projectData.title ? <div className="milestones"><div className="milestone done"><b>✓</b><strong>Project Idea</strong><small>Project created</small><em>Completed</em></div><div className={`milestone ${technologyResult ? "done" : "active"}`}><b>{technologyResult ? "✓" : "2"}</b><strong>Technology Recommendation</strong><small>{technologyResult ? "Recommendations ready" : "Next step"}</small><em>{technologyResult ? "Completed" : "In Progress"}</em></div><div className={`milestone ${savedProgress.length ? "done" : ""}`}><b>{savedProgress.length ? "✓" : "3"}</b><strong>Progress Tracking</strong><small>{savedProgress.length ? "Weekly update saved" : "Coming up next"}</small><em>{savedProgress.length ? "Updated" : "Upcoming"}</em></div></div> : <div className="empty-panel-state"><span>✦</span><strong>No milestones yet</strong><p>Your roadmap will appear after you create a project.</p><button onClick={() => setCurrentPage("project")}>Start a project →</button></div>}</article>
-                <article className="dash-panel activity-panel"><div className="panel-title"><h2>◷ &nbsp; Recent Activity</h2><button onClick={() => alert("Showing recent project activity.")}>View All →</button></div>{projectData.title || savedProgress.length ? <div className="activity-list">{projectData.title && <div><small>Project workspace</small><b className="activity-icon">✓</b><p><strong>{projectData.title}</strong><span>Your project details are saved in this workspace.</span></p></div>}{technologyResult && <div><small>Recommendation</small><b className="activity-icon">✦</b><p><strong>Technology recommendations ready</strong><span>Your suggested technology stack is available.</span></p></div>}{savedProgress.length > 0 && <div><small>Progress update</small><b className="activity-icon">↗</b><p><strong>Weekly progress saved</strong><span>Your latest progress update is available.</span></p></div>}</div> : <div className="empty-panel-state"><span>◷</span><strong>A fresh start</strong><p>Project updates and agent activity will show here as you work.</p><button onClick={() => setCurrentPage("project")}>Add project details →</button></div>}</article>
-              </div>
-            </section>
-          )}
-
-          {/* --------------------------------------------------
-            AI MENTOR MODAL
-        -------------------------------------------------- */}
-          {aiOpen && (
-            <div className="ai-modal-overlay">
-              <div className="ai-modal">
-                <button
-                  className="ai-close"
-                  onClick={() => setAiOpen(false)}
-                  aria-label="Close AI Mentor"
-                >
-                  ✕
-                </button>
-
-                <div className="ai-modal-icon">🤖</div>
-                <h2>AI Mentor</h2>
-                <p>
-                  Hi! I&apos;m your AI Project Mentor. Choose an option below to
-                  get guidance for your academic project.
-                </p>
-
-                <div className="ai-options">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      alert(
-                        "AI Mentor: Start by defining your project problem, target users, and expected outcome."
-                      )
-                    }
-                  >
-                    💡 Suggest Project Ideas
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      alert(
-                        "AI Mentor: Break your project into milestones such as planning, design, development, testing, and deployment."
-                      )
-                    }
-                  >
-                    📋 Create Project Plan
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setCurrentPage("project")}
-                  >
-                    🛠️ Recommend Technologies
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAiOpen(false);
-                      openProgressAgent();
-                    }}
-                  >
-                    🎯 Track Project Progress
-                  </button>
-                </div>
               </div>
             </div>
-          )}
-        </main>
-      </div>
+
+            {riskError && (
+              <div className="progress-error" style={{ marginBottom: "16px" }}>
+                ⚠️ {riskError}
+              </div>
+            )}
+
+            {!riskResult && !riskLoading && (
+              <div className="empty-chart-state" style={{ textAlign: "center", padding: "40px 20px" }}>
+                <strong>No Risk Assessment Generated Yet</strong>
+                <p>Click "Run Risk Assessment" to have the agent analyze your project feasibility, scope, and tech stack.</p>
+                <button
+                  type="button"
+                  className="primary-button"
+                  style={{ marginTop: "16px" }}
+                  onClick={handleRunRiskAssessment}
+                >
+                  Start Risk Assessment Now →
+                </button>
+              </div>
+            )}
+
+            {riskLoading && (
+              <div className="progress-result-box" style={{ textAlign: "center", padding: "30px" }}>
+                <h3>🔍 AI Risk Analyst is evaluating your project...</h3>
+                <p>Analyzing technical feasibility, dataset availability, sprint timelines, and external API rate limits.</p>
+              </div>
+            )}
+
+            {riskResult && (
+              <div className="risk-results-wrap">
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+                  <div className="progress-stat-box" style={{ borderLeft: riskResult.overall_risk === "HIGH" ? "4px solid #f87171" : riskResult.overall_risk === "MEDIUM" ? "4px solid #fbbf24" : "4px solid #34d399" }}>
+                    <span>OVERALL RISK LEVEL</span>
+                    <strong style={{ color: riskResult.overall_risk === "HIGH" ? "#f87171" : riskResult.overall_risk === "MEDIUM" ? "#fbbf24" : "#34d399" }}>
+                      {riskResult.overall_risk} RISK
+                    </strong>
+                    <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
+                      Risk Index: {riskResult.overall_risk_score || 60}/100
+                    </small>
+                  </div>
+
+                  <div className="progress-stat-box">
+                    <span>EVALUATED PROJECT</span>
+                    <strong>{projectData.title || "Academic Project"}</strong>
+                    <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
+                      {riskResult.risks?.length || 0} identified risk areas
+                    </small>
+                  </div>
+
+                  <div className="progress-stat-box">
+                    <span>AGENT STATUS</span>
+                    <strong style={{ color: "#34d399" }}>Analysis Complete</strong>
+                    <small style={{ color: "#9ca9c3", display: "block", marginTop: "4px" }}>
+                      Mitigations Ready
+                    </small>
+                  </div>
+                </div>
+
+                {riskResult.summary && (
+                  <div className="progress-result-box" style={{ marginBottom: "24px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", padding: "18px", borderRadius: "10px" }}>
+                    <h3 style={{ margin: "0 0 8px 0", color: "#eaf0ff" }}>📌 Executive Summary</h3>
+                    <p style={{ margin: 0, color: "#cbd5ed", lineHeight: "1.6" }}>{riskResult.summary}</p>
+                  </div>
+                )}
+
+                {riskResult.top_priority_actions?.length > 0 && (
+                  <div style={{ marginBottom: "24px", background: "rgba(35, 127, 128, 0.1)", border: "1px solid rgba(35, 127, 128, 0.3)", borderRadius: "10px", padding: "18px" }}>
+                    <h3 style={{ margin: "0 0 10px 0", color: "#6be5c7" }}>🎯 Top Priority Actions to De-Risk Project</h3>
+                    <ul style={{ margin: 0, paddingLeft: "20px", color: "#d1fae5" }}>
+                      {riskResult.top_priority_actions.map((action, idx) => (
+                        <li key={idx} style={{ marginBottom: "8px", lineHeight: "1.5" }}>{action}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <h3 style={{ color: "#eaf0ff", margin: "20px 0 14px 0" }}>Detailed Risk Matrix & Mitigations</h3>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
+                  {riskResult.risks?.map((r, i) => (
+                    <div
+                      key={r.id || i}
+                      style={{
+                        background: "rgba(20, 27, 44, 0.9)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        borderRadius: "12px",
+                        padding: "18px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "10px"
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
+                        <span style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", color: "#77e8d4", background: "rgba(119, 232, 212, 0.12)", padding: "3px 8px", borderRadius: "4px" }}>
+                          {r.category}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "11px",
+                            fontWeight: "800",
+                            padding: "3px 8px",
+                            borderRadius: "4px",
+                            background: r.severity === "HIGH" ? "rgba(248, 113, 113, 0.2)" : r.severity === "MEDIUM" ? "rgba(251, 191, 36, 0.2)" : "rgba(52, 211, 153, 0.2)",
+                            color: r.severity === "HIGH" ? "#f87171" : r.severity === "MEDIUM" ? "#fbbf24" : "#34d399",
+                          }}
+                        >
+                          {r.severity} SEVERITY
+                        </span>
+                      </div>
+
+                      <h4 style={{ margin: "4px 0", color: "#f3f4f6", fontSize: "15px" }}>{r.risk}</h4>
+
+                      <div style={{ fontSize: "12px", color: "#9ca9c3", display: "flex", gap: "14px" }}>
+                        <span>Probability: <strong style={{ color: "#e5e7eb" }}>{r.probability}</strong></span>
+                        <span>Impact: <strong style={{ color: "#e5e7eb" }}>{r.impact}</strong></span>
+                      </div>
+
+                      <div style={{ background: "rgba(0,0,0,0.2)", padding: "10px", borderRadius: "6px", fontSize: "12px", color: "#cbd5e1" }}>
+                        <div style={{ marginBottom: "6px" }}><strong>Reason:</strong> {r.reason}</div>
+                        <div><strong>Possible Effect:</strong> {r.possible_effect}</div>
+                      </div>
+
+                      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "10px" }}>
+                        <div style={{ fontSize: "12px", color: "#a7f3d0", marginBottom: "6px" }}>
+                          <strong>💡 Mitigation Strategy:</strong>
+                          <p style={{ margin: "4px 0 0 0", color: "#e2e8f0" }}>{r.mitigation}</p>
+                        </div>
+                        {r.recommended_action && (
+                          <div style={{ fontSize: "12px", color: "#93c5fd" }}>
+                            <strong>👉 Recommended Action:</strong> {r.recommended_action}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {riskResult.final_recommendation && (
+                  <div style={{ marginTop: "24px", padding: "16px", borderRadius: "8px", background: "rgba(138, 99, 255, 0.1)", border: "1px solid rgba(138, 99, 255, 0.3)", color: "#e0e7ff", fontSize: "13px" }}>
+                    <strong>Mentor Recommendation:</strong> {riskResult.final_recommendation}
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            MILESTONE 3: ON-DEMAND DOCUMENTATION GENERATION HUB
+        -------------------------------------------------- */}
+        {currentPage === "documentation" && (
+          <section className="glass-card documentation-page">
+            <div className="card-heading">
+              <div className="section-icon" style={{ background: "#253149", color: "#77a6f7" }}>📄</div>
+              <div>
+                <div className="section-number">MILESTONE 03</div>
+                <h2>On-Demand Documentation Generation Hub</h2>
+                <p>Generate academic-standard Project Synopsis, Methodology, and Progress Reports.</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "10px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "14px", marginBottom: "20px", flexWrap: "wrap" }}>
+              <button
+                type="button"
+                className={`segmented-button ${docTab === "synopsis" ? "active" : ""}`}
+                style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "synopsis" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "synopsis" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "synopsis" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
+                onClick={() => setDocTab("synopsis")}
+              >
+                📄 Project Synopsis
+              </button>
+              <button
+                type="button"
+                className={`segmented-button ${docTab === "methodology" ? "active" : ""}`}
+                style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "methodology" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "methodology" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "methodology" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
+                onClick={() => setDocTab("methodology")}
+              >
+                🛠️ System Methodology
+              </button>
+              <button
+                type="button"
+                className={`segmented-button ${docTab === "progress" ? "active" : ""}`}
+                style={{ padding: "10px 18px", borderRadius: "6px", border: "1px solid", borderColor: docTab === "progress" ? "#43e2c1" : "rgba(255,255,255,0.15)", background: docTab === "progress" ? "rgba(67, 226, 193, 0.15)" : "transparent", color: docTab === "progress" ? "#43e2c1" : "#cbd5e1", fontWeight: "600" }}
+                onClick={() => setDocTab("progress")}
+              >
+                📊 Progress Report
+              </button>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px", flexWrap: "wrap", gap: "10px" }}>
+              <div>
+                <strong style={{ color: "#f3f4f6", fontSize: "16px" }}>
+                  {docTab === "synopsis" ? "Academic Project Synopsis" : docTab === "methodology" ? "System Methodology & Architecture" : "Weekly Progress Report"}
+                </strong>
+                <p style={{ margin: "4px 0 0 0", color: "#9ca9c3", fontSize: "12px" }}>
+                  {docTab === "synopsis" ? "Complete project problem statement, objectives, tech stack, and expected outcomes." : docTab === "methodology" ? "Modular breakdown, architecture layers, API pipeline, and validation model." : "Weekly milestones, completed tasks, identified risks, and mentor sign-off sheet."}
+                </p>
+              </div>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button
+                  type="button"
+                  className="primary-button"
+                  disabled={docLoading}
+                  onClick={() => handleGenerateDoc(docTab)}
+                >
+                  {docLoading ? "Generating with AI..." : docResult[docTab] ? "Regenerate Document" : "Generate Document"} ⚡
+                </button>
+                {docResult[docTab] && (
+                  <>
+                    <button
+                      type="button"
+                      style={{ padding: "10px 14px", borderRadius: "6px", background: "rgba(255,255,255,0.08)", color: "#e2e8f0", border: "1px solid rgba(255,255,255,0.2)" }}
+                      onClick={() => handleCopyDoc(docResult[docTab])}
+                    >
+                      {copySuccess ? "✓ Copied!" : "📋 Copy"}
+                    </button>
+                    <button
+                      type="button"
+                      style={{ padding: "10px 14px", borderRadius: "6px", background: "rgba(255,255,255,0.08)", color: "#e2e8f0", border: "1px solid rgba(255,255,255,0.2)" }}
+                      onClick={() => handleDownloadDoc(`${projectData.title || "project"}_${docTab}.md`, docResult[docTab])}
+                    >
+                      ⬇ Download .md
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {docError && (
+              <div className="progress-error" style={{ marginBottom: "16px" }}>
+                ⚠️ {docError}
+              </div>
+            )}
+
+            {!docResult[docTab] && !docLoading && (
+              <div className="empty-chart-state" style={{ textAlign: "center", padding: "50px 20px" }}>
+                <strong>No Document Generated Yet for this Section</strong>
+                <p>Click "Generate Document" above to generate this report using your project data.</p>
+              </div>
+            )}
+
+            {docLoading && (
+              <div className="progress-result-box" style={{ textAlign: "center", padding: "40px" }}>
+                <h3>⏳ Formatting Academic Document...</h3>
+                <p>Generating structured headings, formal academic sections, and system specifications.</p>
+              </div>
+            )}
+
+            {docResult[docTab] && (
+              <div
+                style={{
+                  background: "#FFFDF2",
+                  border: "1px solid #F3E8B8",
+                  borderRadius: "10px",
+                  padding: "24px",
+                  color: "#1E293B",
+                  fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+                  fontSize: "13px",
+                  lineHeight: "1.7",
+                  whiteSpace: "pre-wrap",
+                  overflowX: "auto",
+                  maxHeight: "650px",
+                  overflowY: "auto"
+                }}
+              >
+                {docResult[docTab]}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            SETTINGS PAGE
+        -------------------------------------------------- */}
+        {currentPage === "settings" && (
+          <section className="settings-page settings-workspace">
+            <div className="settings-hero">
+              <div className="settings-hero-copy">
+                <span className="settings-eyebrow"><i /> YOUR WORKSPACE, YOUR RULES</span>
+                <h2>Make it feel like <em>yours.</em></h2>
+                <p>Personalize your profile, fine-tune your workspace, and choose how your AI Mentor supports you.</p>
+              </div>
+              <div className="settings-hero-orb" aria-hidden="true"><span>✳</span><i /><b /></div>
+              <div className="settings-hero-foot"><span><i /> Preferences save automatically</span><span>WORKSPACE SETTINGS <b>•</b> PERSONAL</span></div>
+            </div>
+            <div className="settings-section-label"><span>01 / PERSONALIZATION</span><p>Your identity and how the app looks</p></div>
+            <article className="settings-card settings-profile-card">
+              <h2><span className="settings-heading-icon teal">◎</span><span>Profile<small>Your personal details</small></span></h2>
+              <div className="settings-grid">
+                <div className="input-group">
+                  <label htmlFor="set-name">Full Name</label>
+                  <input id="set-name" name="name" value={formData.name} onChange={handleProfileChange} placeholder="Your name" />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="set-dept">Department</label>
+                  <input id="set-dept" name="department" value={formData.department} onChange={handleProfileChange} placeholder="e.g. CSE" />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="set-email">Email</label>
+                  <input id="set-email" value={auth.email} readOnly />
+                </div>
+              </div>
+            </article>
+
+            <article className="settings-card settings-appearance-card">
+              <h2><span className="settings-heading-icon violet">◐</span><span>Appearance<small>Shape your visual workspace</small></span></h2>
+              <div className="settings-row">
+                <div><strong>Theme</strong><span>Choose dark or light interface</span></div>
+                <div className="segmented">
+                  {["dark", "light"].map((t) => (
+                    <button key={t} type="button" className={settings.theme === t ? "on" : ""} onClick={() => updateSetting("theme", t)}>{t === "dark" ? "🌙 Dark" : "☀️ Light"}</button>
+                  ))}
+                </div>
+              </div>
+              <div className="settings-row">
+                <div><strong>Font size</strong><span>Make text bigger or smaller</span></div>
+                <div className="segmented">
+                  {[["medium", "Medium"], ["large", "Large"], ["xl", "Extra Large"]].map(([v, label]) => (
+                    <button key={v} type="button" className={settings.fontSize === v ? "on" : ""} onClick={() => updateSetting("fontSize", v)}>{label}</button>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <div className="settings-section-label"><span>02 / PREFERENCES</span><p>Keep your workflow comfortable and focused</p></div>
+            <article className="settings-card settings-notification-card">
+              <h2><span className="settings-heading-icon amber">⌁</span><span>Notifications<small>Choose what deserves your attention</small></span></h2>
+              <label className="settings-row toggle-row">
+                <div><strong>Agent updates</strong><span>Notify me when an agent completes</span></div>
+                <input type="checkbox" checked={settings.notifications} onChange={(e) => updateSetting("notifications", e.target.checked)} />
+              </label>
+              <label className="settings-row toggle-row">
+                <div><strong>Weekly progress reminder</strong><span>Remind me to submit weekly progress</span></div>
+                <input type="checkbox" checked={settings.weeklyReminder} onChange={(e) => updateSetting("weeklyReminder", e.target.checked)} />
+              </label>
+            </article>
+
+            <article className="settings-card settings-mentor-card">
+              <h2><span className="settings-heading-icon purple">✳</span><span>AI Mentor<small>Set the tone of your guidance</small></span></h2>
+              <div className="settings-row">
+                <div><strong>Guidance style</strong><span>How detailed the mentor should be</span></div>
+                <div className="segmented">
+                  {[["brief", "Brief"], ["detailed", "Detailed"]].map(([v, label]) => (
+                    <button key={v} type="button" className={settings.mentorStyle === v ? "on" : ""} onClick={() => updateSetting("mentorStyle", v)}>{label}</button>
+                  ))}
+                </div>
+              </div>
+              <button type="button" className="primary-button" onClick={() => setAiOpen(true)}>Open AI Mentor <span className="button-arrow">→</span></button>
+            </article>
+
+            <div className="settings-section-label"><span>03 / ACCOUNT</span><p>Manage access to your account</p></div>
+            <article className="settings-card settings-account-card">
+              <h2><span className="settings-heading-icon slate">⌑</span><span>Account<small>Your sign-in and session</small></span></h2>
+              <div className="settings-row">
+                <div><strong>{auth.name}</strong><span>{auth.email}</span></div>
+                <button type="button" className="logout-button" onClick={handleLogout}>Logout</button>
+              </div>
+            </article>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            AI PROJECT MENTOR — dedicated workspace
+        -------------------------------------------------- */}
+        {currentPage === "mentor" && (
+          <section className="mentor-page">
+            <div className="mentor-hero" style={{ marginBottom: "20px" }}>
+              <div className="mentor-hero-copy">
+                <span className="mentor-kicker">CONVERSATIONAL ACADEMIC MENTOR</span>
+                <h2>One-on-One Project Guidance<br/><em>Whenever you need it.</em></h2>
+                <p>Discuss your architecture, troubleshoot tricky bugs, plan your upcoming sprints, and get viva evaluation prep.</p>
+                <div className="mentor-hero-actions">
+                  <button className="mentor-primary" onClick={() => setCurrentPage(projectData.title ? "progress" : "project")}>
+                    {projectData.title ? "Track Sprint Progress" : "Setup Project Workspace"} <span>→</span>
+                  </button>
+                  <button className="mentor-secondary" onClick={() => setCurrentPage("risk")}>View Risk Matrix</button>
+                </div>
+              </div>
+              <div className="mentor-orb-scene" aria-hidden="true">
+                <div className="mentor-orbit orbit-one"></div>
+                <div className="mentor-orbit orbit-two"></div>
+                <div className="mentor-orb"><span>✦</span></div>
+                <div className="mentor-orb-caption">AI MENTOR <small>ONLINE · CONTEXT-AWARE</small></div>
+              </div>
+            </div>
+
+            {/* Live Conversational Chatroom */}
+            <div className="glass-card" style={{ padding: "20px", marginBottom: "24px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "14px", marginBottom: "16px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: "#168f8b", display: "grid", placeItems: "center", fontSize: "18px" }}>🤖</div>
+                  <div>
+                    <h3 style={{ margin: 0, color: "#f3f4f6", fontSize: "16px" }}>Academic Mentor Consultation</h3>
+                    <small style={{ color: "#77e8d4" }}>
+                      ● Active • Project Context: {projectData.title || "Standard Workspace"} ({progressData.week || "Week 1"})
+                    </small>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#9ca9c3", padding: "6px 12px", borderRadius: "6px", fontSize: "11px" }}
+                  onClick={() => {
+                    setMentorChatHistory([
+                      {
+                        sender: "mentor",
+                        text: "👋 Hi! Session refreshed. What aspect of your academic project would you like to discuss?",
+                        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                      }
+                    ]);
+                  }}
+                >
+                  Clear Chat
+                </button>
+              </div>
+
+              {/* Chat Thread */}
+              <div
+                style={{
+                  height: "380px",
+                  overflowY: "auto",
+                  padding: "12px",
+                  background: "#FFFBEA",
+                  borderRadius: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                  marginBottom: "16px",
+                  border: "1px solid #e2e8f0"
+                }}
+              >
+                {mentorChatHistory.map((msg, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: msg.sender === "student" ? "flex-end" : "flex-start",
+                      maxWidth: "85%",
+                      alignSelf: msg.sender === "student" ? "flex-end" : "flex-start"
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px", fontSize: "10px", color: "#64748b" }}>
+                      <span>{msg.sender === "student" ? (formData.name || "Student") : "AI Project Mentor"}</span>
+                      <span>•</span>
+                      <span>{msg.timestamp || ""}</span>
+                    </div>
+                    <div
+                      style={{
+                        padding: "12px 16px",
+                        borderRadius: msg.sender === "student" ? "14px 14px 2px 14px" : "14px 14px 14px 2px",
+                        background: msg.sender === "student" ? "linear-gradient(135deg, #2b6cb0, #4c51bf)" : "#eef2ff",
+                        color: msg.sender === "student" ? "#ffffff" : "#1e293b",
+                        fontSize: "13px",
+                        lineHeight: "1.6",
+                        whiteSpace: "pre-wrap",
+                        border: msg.sender === "student" ? "none" : "1px solid #dbeafe",
+                        boxShadow: "0 2px 6px rgba(0,0,0,0.15)"
+                      }}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+                {mentorLoading && (
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#77e8d4", fontSize: "12px", padding: "8px" }}>
+                    <span>🤖 AI Mentor is formulating advice...</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Quick Prompt Suggestions */}
+              <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "10px", marginBottom: "12px", scrollbarWidth: "none" }}>
+                <span style={{ fontSize: "11px", color: "#9ca9c3", alignSelf: "center", whiteSpace: "nowrap" }}>Quick Prompts:</span>
+                {[
+                  "How should I structure my weekly tasks?",
+                  "Help me debug backend API errors",
+                  "What questions will supervisor ask in viva?",
+                  "How to connect MongoDB to Flask?"
+                ].map((promptText, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    style={{
+                      whiteSpace: "nowrap",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      color: "#cbd5e1",
+                      borderRadius: "20px",
+                      padding: "6px 12px",
+                      fontSize: "11px",
+                      cursor: "pointer",
+                      transition: "all 0.15s"
+                    }}
+                    onClick={() => handleSendMentorMessage(promptText)}
+                  >
+                    💡 {promptText}
+                  </button>
+                ))}
+              </div>
+
+              {/* Input Form */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSendMentorMessage();
+                }}
+                style={{ display: "flex", gap: "10px" }}
+              >
+                <input
+                  type="text"
+                  placeholder="Ask a question about your project, report, or implementation..."
+                  value={mentorInput}
+                  onChange={(e) => setMentorInput(e.target.value)}
+                  disabled={mentorLoading}
+                  style={{
+                    flex: 1,
+                    padding: "12px 16px",
+                    borderRadius: "8px",
+                    background: "#0b1120",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "#f3f4f6",
+                    fontSize: "13px",
+                    outline: "none"
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="primary-button"
+                  disabled={mentorLoading || !mentorInput.trim()}
+                  style={{ padding: "0 22px" }}
+                >
+                  Send ↗
+                </button>
+              </form>
+            </div>
+
+            {/* Mentor Action Quick Links */}
+            <div className="mentor-section-heading">
+              <div><span>STRATEGIC PHASES</span><h2>Guiding your lifecycle</h2></div>
+              <p>Key checkpoints for academic success</p>
+            </div>
+            <div className="mentor-action-grid">
+              <article className="mentor-action-card mentor-idea">
+                <div className="mentor-action-icon">✦</div>
+                <span className="mentor-card-label">01 / IDEATE & SCOPE</span>
+                <h3>Refine Problem Statement</h3>
+                <p>Ensure your project scope is achievable within academic semester deadlines.</p>
+                <button onClick={() => handleSendMentorMessage("How can I narrow down my project scope to ensure it is finished on time?")}>
+                  Ask Mentor <span>↗</span>
+                </button>
+              </article>
+              <article className="mentor-action-card mentor-plan">
+                <div className="mentor-action-icon">⌘</div>
+                <span className="mentor-card-label">02 / ARCHITECTURE</span>
+                <h3>Technology Alignment</h3>
+                <p>Verify that your frontend, backend, and database integrate with minimal friction.</p>
+                <button onClick={() => setCurrentPage("technology")}>
+                  Review Tech Stack <span>↗</span>
+                </button>
+              </article>
+              <article className="mentor-action-card mentor-tech">
+                <div className="mentor-action-icon">⚡</div>
+                <span className="mentor-card-label">03 / RISK MITIGATION</span>
+                <h3>Blocker Management</h3>
+                <p>Proactively resolve API limits, data shortages, and integration issues.</p>
+                <button onClick={() => setCurrentPage("risk")}>
+                  Inspect Risks <span>↗</span>
+                </button>
+              </article>
+              <article className="mentor-action-card mentor-progress">
+                <div className="mentor-action-icon">◷</div>
+                <span className="mentor-card-label">04 / DEFENSE & REPORTS</span>
+                <h3>Project Documentation</h3>
+                <p>Generate IEEE-formatted project synopsis and methodology documentation.</p>
+                <button onClick={() => setCurrentPage("documentation")}>
+                  Open Doc Hub <span>↗</span>
+                </button>
+              </article>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            DASHBOARD
+        -------------------------------------------------- */}
+        {currentPage === "faculty" && (() => {
+          const plan = timelineData || DEFAULT_TIMELINE;
+          const weeks = Array.isArray(plan.weekly_plan) ? plan.weekly_plan : [];
+          const tasks = weeks.flatMap((week, wi) => (week.tasks || []).map((task, ti) => ({id:`w${week.week ?? wi+1}-t${ti}`, week:week.week ?? wi+1, milestone:week.milestone || `Week ${week.week ?? wi+1}`, task})));
+          const checkedDone = tasks.filter(task => milestone4Completed[task.id]).length;
+          const checkedPercent = tasks.length ? Math.round(checkedDone/tasks.length*100) : 0;
+          // Live student's progress = best of checklist and Progress Tracker; 100% means every task is Completed
+          const myPercent = Math.max(checkedPercent, trackerPercent);
+          const myAllDone = myPercent >= 100 && tasks.length > 0;
+          const myDone = myAllDone ? tasks.length : Math.max(checkedDone, Math.round(myPercent/100*tasks.length));
+          const myDoneIds = new Set(tasks.filter(t => milestone4Completed[t.id]).map(t => t.id));
+          if (!myAllDone) { tasks.forEach(t => { if (myDoneIds.size < myDone && !myDoneIds.has(t.id)) myDoneIds.add(t.id); }); }
+          // Cohort roster: first row is the live student (real data from this app); the rest is sample roster data for the faculty view.
+          const roster = [
+            { name: formData.name || auth?.name || "Student", project: projectData.title || plan.project_title || "AI Project Mentor", percent: myPercent, updated: "Today", blocker: "", live: true },
+            { name: "Ananya Reddy", project: "Smart Attendance System", percent: 78, updated: "Yesterday", blocker: "", nextTask: "Complete the face-recognition module testing" },
+            { name: "Karthik Varma", project: "Crop Disease Detector", percent: 52, updated: "2 days ago", blocker: "Dataset labelling is taking longer than planned.", nextTask: "Finish labelling and start model training" },
+            { name: "Sneha Patel", project: "Campus Chatbot", percent: 91, updated: "Today", blocker: "", nextTask: "Prepare final demo and documentation" },
+            { name: "Rohit Sharma", project: "Expense Tracker App", percent: 24, updated: "5 days ago", blocker: "API integration pending, no update this week.", nextTask: "Integrate the expense API with the frontend" },
+            { name: "Meghana Rao", project: "Library Management Portal", percent: 100, updated: "3 days ago", blocker: "" }
+          ].map((st, idx) => {
+            const doneCount = st.live ? myDone : Math.round(st.percent/100*tasks.length);
+            const doneIds = st.live ? null : new Set(tasks.slice(0, doneCount).map(t => t.id));
+            const isDone = (t) => st.live ? (myAllDone || myDoneIds.has(t.id)) : doneIds.has(t.id);
+            const next = tasks.find(t => !isDone(t));
+            const health = st.percent >= 100 ? "Completed" : st.percent >= 60 ? "On Track" : st.percent >= 30 ? "Needs Attention" : "Behind";
+            const cls = health === "Completed" ? "done" : health === "On Track" ? "ok" : health === "Needs Attention" ? "warn" : "bad";
+            const summary = `${st.name} has completed ${doneCount} of ${tasks.length} planned tasks (${st.percent}%) on “${st.project}”. Status: ${health}. ` + (st.live ? (next ? `Next focus: Week ${next.week} — ${next.task}. ` : "All planned tasks are complete. ") : (st.nextTask ? `Next focus: ${st.nextTask}. ` : "All planned tasks are complete. ")) + (st.blocker ? `Reported blocker: ${st.blocker}` : "No blockers reported.");
+            return { ...st, id: idx, doneCount, isDone, next, health, cls, summary };
+          });
+          const avg = Math.round(roster.reduce((a, r) => a + r.percent, 0) / roster.length);
+          const onTrack = roster.filter(r => r.health === "On Track" || r.health === "Completed").length;
+          const attention = roster.filter(r => r.health === "Needs Attention" || r.health === "Behind").length;
+          return <section className="m4-workspace">
+            <div className="m4-hero faculty-hero"><div><span className="m4-kicker">FACULTY MONITORING · MILESTONE 4</span><h2>Project health <em>at a glance.</em></h2><p>Monitor student progress, project health indicators and auto-generated mentor summaries in one place.</p></div><div className="m4-ring" style={{"--progress": `${avg}%`}}><div><strong>{avg}%</strong><span>AVG PROGRESS</span></div></div></div>
+            <div className="m4-metrics"><article><span>Students monitored</span><strong>{roster.length}</strong><small>Active project teams</small></article><article><span>On track</span><strong>{onTrack}</strong><small>Healthy or completed projects</small></article><article><span>Needs attention</span><strong>{attention}</strong><small>Behind or at risk</small></article><article><span>Average progress</span><strong>{avg}%</strong><small>Across all students</small></article></div>
+            <div className="m4-section-head"><div><span>01 · PROJECT HEALTH</span><h3>Health indicators</h3></div><span className="m4-status">{roster.length} students</span></div>
+            <div className="m4-table-wrap"><table className="m4-table"><thead><tr><th>Student</th><th>Project</th><th>Progress</th><th>Tasks</th><th>Last update</th><th>Health</th></tr></thead><tbody>{roster.map(r => <tr key={r.id}><td>{r.name}</td><td>{r.project}</td><td><div className="fac-bar"><i style={{width:`${r.percent}%`}}/></div><small>{r.percent}%</small></td><td>{r.doneCount}/{tasks.length}</td><td>{r.updated}</td><td><span className={`fac-pill ${r.cls}`}>{r.health}</span></td></tr>)}</tbody></table></div>
+            <div className="m4-section-head"><div><span>02 · AUTO-GENERATED INSIGHT</span><h3>Mentor summaries</h3></div></div>
+            <div className="fac-summaries">{roster.map(r => <article className={`fac-summary ${r.cls}`} key={r.id}><div className="fac-summary-head"><strong>{r.name}</strong><span className={`fac-pill ${r.cls}`}>{r.health}</span></div><p>{r.summary}</p><small>Generated automatically from saved progress data.</small></article>)}</div>
+            <div className="m4-section-head"><div><span>03 · ANALYTICS</span><h3>Progress graphs</h3></div><span className="m4-status">Live overview</span></div>
+            <div className="fac-charts">
+              <article className="fac-chart-card"><h4>Progress by student</h4>
+                <div className="fac-hbars">{roster.map(r => <div className="fac-hbar-row" key={r.id}><span className="fac-hbar-name">{r.name}</span><div className="fac-hbar-track"><i className={r.cls} style={{width:`${r.percent}%`}}/></div><b>{r.percent}%</b></div>)}</div>
+              </article>
+              <article className="fac-chart-card"><h4>Health distribution</h4>
+                {(() => { const c = {done:0, ok:0, warn:0, bad:0}; roster.forEach(r => { c[r.cls]++; }); const n = roster.length || 1; const a = c.done/n*100, b = a + c.ok/n*100, d = b + c.warn/n*100;
+                  return <div className="fac-donut-wrap"><div className="fac-donut" style={{background:`conic-gradient(#3b82f6 0 ${a}%, #16a34a ${a}% ${b}%, #f59e0b ${b}% ${d}%, #ef4444 ${d}% 100%)`}}><div><strong>{roster.length}</strong><span>students</span></div></div>
+                  <ul className="fac-legend"><li><i style={{background:"#3b82f6"}}/>Completed <b>{c.done}</b></li><li><i style={{background:"#16a34a"}}/>On Track <b>{c.ok}</b></li><li><i style={{background:"#f59e0b"}}/>Needs Attention <b>{c.warn}</b></li><li><i style={{background:"#ef4444"}}/>Behind <b>{c.bad}</b></li></ul></div>; })()}
+              </article>
+              <article className="fac-chart-card"><h4>Tasks completed vs remaining</h4>
+                <div className="fac-stack-list">{roster.map(r => <div className="fac-stack-row" key={r.id}><span>{r.name}</span><div className="fac-stack"><i className="d" style={{width:`${tasks.length ? r.doneCount/tasks.length*100 : 0}%`}}/><i className="p" style={{width:`${tasks.length ? (tasks.length-r.doneCount)/tasks.length*100 : 0}%`}}/></div><b>{r.doneCount}/{tasks.length}</b></div>)}</div>
+                <div className="fac-stack-key"><span><i className="d"/>Completed</span><span><i className="p"/>Remaining</span></div>
+              </article>
+              <article className="fac-chart-card"><h4>Weekly completion · {roster[0].name}</h4>
+                <div className="fac-columns">{weeks.map((w, wi) => { const wn = w.week ?? wi+1; const wt = tasks.filter(t => t.week === wn); const wd = wt.filter(t => roster[0].isDone(t)).length; const pc = wt.length ? Math.round(wd/wt.length*100) : 0; return <div className="fac-col" key={wn}><b>{pc}%</b><div className="fac-col-track"><i style={{height:`${pc}%`}}/></div><span>W{wn}</span></div>; })}</div>
+              </article>
+            </div>
+            <div className="m4-section-head"><div><span>04 · MILESTONE 4 · PROGRESS TRACKING</span><h3>Weekly task checklist · {roster[0].name}</h3></div><span className="m4-status">{roster[0].doneCount} of {tasks.length} complete</span></div>
+            {weeks.length ? weeks.map((week, wi) => {
+              const wn = week.week ?? wi + 1;
+              const weekTasks = tasks.filter(task => task.week === wn);
+              const weekDone = weekTasks.filter(task => roster[0].isDone(task)).length;
+              return <article className="m4-week" key={wn}><div className="m4-week-head"><div><span>WEEK {wn}</span><h3>{week.milestone || `Week ${wn}`}</h3></div><span>{weekDone}/{weekTasks.length} tasks</span></div>
+                {weekTasks.map(task => { const d = roster[0].isDone(task); return <label className={`m4-task ${d ? "is-done" : ""}`} key={task.id}><input type="checkbox" checked={d} onChange={() => { if (!myAllDone) setMilestone4Completed(previous => { const next = { ...previous, [task.id]: !previous[task.id] }; try { localStorage.setItem("apm_milestone4_completed", JSON.stringify(next)); } catch {} return next; }); }}/><span className="m4-task-check">{d ? "✓" : ""}</span><span>{task.task}</span><small>{d ? "Completed" : "Pending"}</small></label>; })}
+              </article>;
+            }) : <div className="m4-empty">No timeline tasks found. Generate or load your project roadmap first.</div>}
+            <p className="m4-note">Note: task completion is saved in this browser. 100% in the Progress Tracker marks every task Completed.</p>
+            <div className="m4-section-head"><div><span>05 · TASK REPORT</span><h3>Task report · {roster[0].name}</h3></div></div>
+            {[roster[0]].map(r => <details className="fac-detail" key={r.id} open><summary><span>{r.name}</span><small>{r.doneCount}/{tasks.length} tasks · {r.percent}%</small></summary><div className="m4-table-wrap"><table className="m4-table"><thead><tr><th>Week</th><th>Milestone</th><th>Task</th><th>Status</th></tr></thead><tbody>{tasks.map(task => <tr key={task.id}><td>Week {task.week}</td><td>{task.milestone}</td><td>{task.task}</td><td><span className={r.isDone(task) ? "m4-pill done" : "m4-pill pending"}>{r.isDone(task) ? "Completed" : "Pending"}</span></td></tr>)}</tbody></table></div></details>)}
+          </section>;
+        })()}
+
+        {currentPage === "dashboard" && (
+          <section className="dashboard-page">
+            <div className="dashboard-spotlight">
+              <div className="spotlight-copy">
+                <span className="spotlight-eyebrow"><i /> YOUR PROJECT COMMAND CENTER</span>
+                <h2>{projectData.title ? `Make ${projectData.title} happen.` : "Your next big idea starts here."}</h2>
+                <p>{projectData.title ? "Your workspace is ready. Keep the momentum going with a focused next step." : "Create your project, map the milestones, and turn a big idea into small wins."}</p>
+                <div className="spotlight-actions">
+                  <button className="spotlight-primary" onClick={() => setCurrentPage(projectData.title ? (technologyResult ? "progress" : "technology") : "project")}>{projectData.title ? (technologyResult ? "Update progress" : "Continue project") : "Create a project"} <span>↗</span></button>
+                  <button className="spotlight-secondary" onClick={() => setCurrentPage("mentor")}>Meet your AI Mentor</button>
+                </div>
+                <div className="spotlight-meta"><span><i className="meta-dot teal-dot" /> Personal workspace</span><span><i className="meta-dot violet-dot" /> AI-powered guidance</span></div>
+              </div>
+              <div className="spotlight-progress-card">
+                <div className="spotlight-card-head"><span>PROJECT COMPLETION</span><b>LIVE OVERVIEW</b></div>
+                <div className="spotlight-ring-row">
+                  <div className="spotlight-ring" style={{"--progress": `${savedProgress.length ? (savedProgress[savedProgress.length-1].progress_percentage || 0) : 0}%`}}><div className="spotlight-ring-center"><strong>{savedProgress.length ? (savedProgress[savedProgress.length-1].progress_percentage || 0) : 0}<small>%</small></strong><span>completed</span></div></div>
+                  <div className="spotlight-ring-details"><strong>{savedProgress.length ? "Momentum is building" : projectData.title ? "Ready for your first update" : "Your journey awaits"}</strong><p>{savedProgress.length ? `${completedTotal} tasks completed so far` : "Your progress graph will grow as you log weekly wins."}</p><div className="ring-legend"><span><i className="legend-teal" /> Completed</span><span><i className="legend-track" /> Remaining</span></div></div>
+                </div>
+                <div className="spotlight-card-foot"><span>Current project</span><strong>{projectData.title || "No project submitted yet"}</strong></div>
+              </div>
+            </div>
+            <div className="stats-grid">
+              <article className="stat-card"><div className="stat-icon">▱</div><div><span>Total Projects</span><strong>{projectData.title ? "1" : "0"}</strong><small className="positive">{projectData.title ? "Project submitted" : "No projects yet"}</small></div></article>
+              <article className="stat-card"><div className="stat-icon">✓</div><div><span>Completed Tasks</span><strong>{completedTotal} <small>/ {totalTasks}</small></strong><small>{savedProgress.length ? "Progress submitted" : "No tasks completed"}</small><div className="mini-progress"><i style={{width:`${savedProgress.length ? (savedProgress[savedProgress.length-1].progress_percentage || 0) : 0}%`}} /></div></div></article>
+              <article className="stat-card"><div className="stat-icon">▣</div><div><span>Active Agents</span><strong>{(technologyResult ? 1 : 0) + (savedProgress.length ? 1 : 0)} <small>/ 2</small></strong><small><b className="green-dot"/> {technologyResult ? 1 : 0} recommendation · {savedProgress.length ? 1 : 0} progress</small></div></article>
+              <article className="stat-card"><div className="stat-icon">↗</div><div><span>Project Progress</span><strong>{savedProgress.length ? `${savedProgress[savedProgress.length-1].progress_percentage || 0}%` : "0%"}</strong><small>On track</small><div className="mini-progress"><i style={{width:`${savedProgress.length ? savedProgress[savedProgress.length-1].progress_percentage || 0 : 0}%`}} /></div></div></article>
+            </div>
+            <div className="dashboard-columns">
+              <article className="dash-panel progress-overview"><div className="panel-title"><h2>♧ &nbsp; Project Progress Overview</h2><select aria-label="Progress time range" defaultValue="Last 7 Days"><option>Last 7 Days</option><option>Last 30 Days</option><option>This Year</option></select></div>{!projectData.title && !savedProgress.length ? <div className="empty-chart-state"><span className="empty-state-orbit">↗</span><strong>Your progress story starts here</strong><p>Submit your first project and weekly updates to see your progress chart.</p><button className="empty-state-action" onClick={() => setCurrentPage("project")}>Create your first project <span>→</span></button></div> : <><div className="chart-area"><div className="y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><svg viewBox="0 0 520 180" role="img" aria-label="Project progress line chart" preserveAspectRatio="none"><defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2563eb" stopOpacity=".18"/><stop offset="100%" stopColor="#2563eb" stopOpacity="0"/></linearGradient></defs>{[12,52,92,132,172].map(y=><line key={y} x1="0" y1={y} x2="520" y2={y} stroke="#e8eef8" strokeWidth="1"/>)}{[0,74,148,222,296,370,444,520].map(x=><line key={x} x1={x} y1="8" x2={x} y2="172" stroke="#edf1f8" strokeWidth="1"/>)}<path d="M0 145 L74 115 L148 102 L222 121 L296 95 L370 108 L444 72 L520 45 L520 172 L0 172Z" fill="url(#chartFill)"/><polyline points="0,145 74,115 148,102 222,121 296,95 370,108 444,72 520,45" fill="none" stroke="#2670ed" strokeWidth="2.5"/>{[[0,145],[74,115],[148,102],[222,121],[296,95],[370,108],[444,72],[520,45]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r="3.5" fill="#2670ed"/> )}</svg></div><div className="chart-dates"><span>Day 1</span><span>Day 2</span><span>Day 3</span><span>Day 4</span><span>Day 5</span><span>Day 6</span><span>Day 7</span></div></>}</article>
+              <article className="dash-panel agents-panel"><div className="panel-title"><h2>♧ &nbsp; AI Agents Status</h2><button onClick={() => setCurrentPage("agents")}>View All →</button></div><div className="agent-grid two-agent-grid"><div className="agent-card"><b className="agent-icon">◇</b><strong>Technology Recommendation Agent</strong><em className={technologyResult ? "status-complete" : "status-pending"}>{techStatus}</em><p>{technologyResult ? "Technology suggestions are ready to review." : "Fill in project details and submit to generate recommendations."}</p><button className="agent-action" onClick={() => setCurrentPage("technology")}>Open Agent →</button></div><span className="agent-arrow">→</span><div className="agent-card"><b className="agent-icon">↗</b><strong>Progress Tracking Agent</strong><em className={savedProgress.length ? "status-complete" : "status-pending"}>{progressLocked ? "Locked" : savedProgress.length ? "Updated" : "Not started"}</em><p>{progressLocked ? "Complete the Technology Recommendation Agent to unlock this agent." : savedProgress.length ? "Your submitted progress is available." : "Submit weekly progress details to calculate project progress."}</p><button className="agent-action" disabled={progressLocked} onClick={openProgressAgent}>{progressLocked ? "🔒 Locked" : "Open Agent →"}</button></div></div></article>
+              <article className="dash-panel milestones-panel"><div className="panel-title"><h2>◷ &nbsp; Project Milestones</h2><button onClick={() => setCurrentPage("review")}>View Roadmap →</button></div>{projectData.title ? <div className="milestones"><div className="milestone done"><b>✓</b><strong>Project Idea</strong><small>Project created</small><em>Completed</em></div><div className={`milestone ${technologyResult ? "done" : "active"}`}><b>{technologyResult ? "✓" : "2"}</b><strong>Technology Recommendation</strong><small>{technologyResult ? "Recommendations ready" : "Next step"}</small><em>{technologyResult ? "Completed" : "In Progress"}</em></div><div className={`milestone ${savedProgress.length ? "done" : ""}`}><b>{savedProgress.length ? "✓" : "3"}</b><strong>Progress Tracking</strong><small>{savedProgress.length ? "Weekly update saved" : "Coming up next"}</small><em>{savedProgress.length ? "Updated" : "Upcoming"}</em></div></div> : <div className="empty-panel-state"><span>✦</span><strong>No milestones yet</strong><p>Your roadmap will appear after you create a project.</p><button onClick={() => setCurrentPage("project")}>Start a project →</button></div>}</article>
+              <article className="dash-panel activity-panel"><div className="panel-title"><h2>◷ &nbsp; Recent Activity</h2><button onClick={() => alert("Showing recent project activity.")}>View All →</button></div>{projectData.title || savedProgress.length ? <div className="activity-list">{projectData.title && <div><small>Project workspace</small><b className="activity-icon">✓</b><p><strong>{projectData.title}</strong><span>Your project details are saved in this workspace.</span></p></div>}{technologyResult && <div><small>Recommendation</small><b className="activity-icon">✦</b><p><strong>Technology recommendations ready</strong><span>Your suggested technology stack is available.</span></p></div>}{savedProgress.length > 0 && <div><small>Progress update</small><b className="activity-icon">↗</b><p><strong>Weekly progress saved</strong><span>Your latest progress update is available.</span></p></div>}</div> : <div className="empty-panel-state"><span>◷</span><strong>A fresh start</strong><p>Project updates and agent activity will show here as you work.</p><button onClick={() => setCurrentPage("project")}>Add project details →</button></div>}</article>
+            </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------
+            AI MENTOR MODAL
+        -------------------------------------------------- */}
+        {aiOpen && (
+          <div className="ai-modal-overlay">
+            <div className="ai-modal">
+              <button
+                className="ai-close"
+                onClick={() => setAiOpen(false)}
+                aria-label="Close AI Mentor"
+              >
+                ✕
+              </button>
+
+              <div className="ai-modal-icon">🤖</div>
+              <h2>AI Mentor</h2>
+              <p>
+                Hi! I&apos;m your AI Project Mentor. Choose an option below to
+                get guidance for your academic project.
+              </p>
+
+              <div className="ai-options">
+                <button
+                  type="button"
+                  onClick={() =>
+                    alert(
+                      "AI Mentor: Start by defining your project problem, target users, and expected outcome."
+                    )
+                  }
+                >
+                  💡 Suggest Project Ideas
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    alert(
+                      "AI Mentor: Break your project into milestones such as planning, design, development, testing, and deployment."
+                    )
+                  }
+                >
+                  📋 Create Project Plan
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage("project")}
+                >
+                  🛠️ Recommend Technologies
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAiOpen(false);
+                    openProgressAgent();
+                  }}
+                >
+                  🎯 Track Project Progress
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
     </>
   );
 }
